@@ -12,6 +12,17 @@
     "message": "Incognito mode detected. Data will be lost when you close the browser.",
     "button": "I Understand"
   },
+  "mydecks": {
+    "title": "My Decks",
+    "button": "Go To"
+  },
+  "shareWithMe": {
+    "title": "Share With Me",
+    "button": "Go To"
+  },
+  "link": {
+    "home": "Home"
+  },
   "feats": [
     {
       "title": "Feat 1",

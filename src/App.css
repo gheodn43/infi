@@ -108,6 +108,14 @@ html body{
 .link-underline:hover {
   border-color: gray;
 }
+.button-cus-1 {
+  background-color: #787f9930;
+  transition: background-color 0.3s ease;
+}
+
+.button-cus-1:hover {
+  background-color: #787F99;
+}
 
 .component-color-1 {
   background: linear-gradient(135deg, #FF9A62, #FDBE9B 50%);
@@ -122,4 +130,12 @@ html body{
 .component-color-3 {
   background: linear-gradient(135deg, #B6F36A, #DCFFB0 50%);
   color: black;
+}
+.bg-primary-cus {
+  background-color: #333645;
+}
+
+.sidebar {
+  border-right: 2px solid white;
+  height: 100%;
 }

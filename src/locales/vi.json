@@ -12,6 +12,17 @@
     "message": "Phát hiện tab ẩn danh. Dữ liệu được lưu sẽ biến mất khi bạn đóng trình duyệt.",
     "button": "Tôi đã hiểu"
   },
+  "mydecks": {
+    "title": "Deck của tôi",
+    "button": "Truy cập"
+  },
+  "shareWithMe": {
+    "title": "Được chia sẽ",
+    "button": "Truy cập"
+  },
+  "link": {
+    "home": "Trang chủ"
+  },
   "feats": [
     {
       "title": "Tính năng 1",
