@@ -1,0 +1,16 @@
+{
+    "about": {
+      "title": "Về chúng tôi",
+      "content": "Chúng tôi là một công ty cam kết cung cấp dịch vụ tốt nhất trên thế giới. Sứ mệnh của chúng tôi là..."
+    },
+    "guide": {
+      "title": "Hướng dẫn",
+      "content": "Đây là hướng dẫn để giúp bạn hiểu cách sử dụng dịch vụ của chúng tôi. Đầu tiên, bạn cần..."
+    },
+    "incognito": {
+      "title": "Phát hiện tab ẩn danh",
+      "message": "Phát hiện tab ẩn danh. Dữ liệu được lưu sẽ biến mất khi bạn đóng trình duyệt.",
+      "button": "Tôi đã hiểu"
+    }
+  }
+  

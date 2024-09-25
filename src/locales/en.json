@@ -1,0 +1,16 @@
+{
+    "about": {
+      "title": "About Us",
+      "content": "We are a company dedicated to providing the best services in the world. Our mission is to..."
+    },
+    "guide": {
+      "title": "Guide",
+      "content": "This is a guide to help you understand how to use our service. First, you need to..."
+    },
+    "incognito": {
+      "title": "Incognito Mode Detected",
+      "message": "Incognito mode detected. Data will be lost when you close the browser.",
+      "button": "I Understand"
+    }
+  }
+  
