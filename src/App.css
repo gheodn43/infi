@@ -26,12 +26,27 @@ html body{
   height: 31px;
 }
 
+.feat-h{
+  height: 30%;
+}
+.feat-img-h{
+
+  height: 10rem;
+}
+
 @media (min-width: 576px) { /* sm */
   .h-custom {
     height: 60px;
   }
   .icon-size{
     height: 36px;
+  }
+  .feat-h{
+    height: 34%;
+  }
+  .feat-img-h{
+   
+    height: 12rem;
   }
 }
 
@@ -42,6 +57,13 @@ html body{
   .icon-size{
     height: 41px;
   }
+  .feat-h{
+    height: 50%;
+  }
+  .feat-img-h{
+   
+    height: 16rem;
+  }
 }
 
 @media (min-width: 992px) { /* lg */
@@ -51,6 +73,13 @@ html body{
   .icon-size{
     height: 46px;
   }
+  .feat-h{
+    height: 60%;
+  }
+  .feat-img-h{
+   
+    height: 20rem;
+  }
 }
 
 @media (min-width: 1200px) { /* xl */
@@ -59,6 +88,13 @@ html body{
   }
   .icon-size {
     height: 54px;
+  }
+  .feat-h{
+    height: 70%;
+  }
+  .feat-img-h{
+    
+    height: 22rem;
   }
 }
 
@@ -73,3 +109,17 @@ html body{
   border-color: gray;
 }
 
+.component-color-1 {
+  background: linear-gradient(135deg, #FF9A62, #FDBE9B 50%);
+  color: black;
+}
+
+.component-color-2 {
+  background: linear-gradient(135deg, #FEDE67, #FEEFBA 50%);
+  color: black;
+}
+
+.component-color-3 {
+  background: linear-gradient(135deg, #B6F36A, #DCFFB0 50%);
+  color: black;
+}
