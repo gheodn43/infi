@@ -14,8 +14,8 @@ function LanguageSwitcher() {
   };
 
   return (
-    <button onClick={toggleLanguage} className="btn text-white">
-      <FontAwesomeIcon icon={faGlobe} className="mx-2" />
+    <button onClick={toggleLanguage} className="btn text-white ">
+      <FontAwesomeIcon icon={faGlobe} className="mr-2" />
       {currentLanguage === 'en' ? 'Tiếng Việt' : 'English'}
     </button>
   );

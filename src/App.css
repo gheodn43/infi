@@ -22,9 +22,16 @@ html body{
   height: 55px;
 }
 
+.icon-size{
+  height: 31px;
+}
+
 @media (min-width: 576px) { /* sm */
   .h-custom {
     height: 60px;
+  }
+  .icon-size{
+    height: 36px;
   }
 }
 
@@ -32,17 +39,26 @@ html body{
   .h-custom {
     height: 65px;
   }
+  .icon-size{
+    height: 41px;
+  }
 }
 
 @media (min-width: 992px) { /* lg */
   .h-custom {
     height: 70px;
   }
+  .icon-size{
+    height: 46px;
+  }
 }
 
 @media (min-width: 1200px) { /* xl */
   .h-custom {
     height: 78px;
+  }
+  .icon-size {
+    height: 54px;
   }
 }
 
