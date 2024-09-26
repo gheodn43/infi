@@ -1,16 +1,43 @@
 {
-    "about": {
-      "title": "About Us",
-      "content": "We are a company dedicated to providing the best services in the world. Our mission is to..."
+  "about": {
+    "title": "About Us",
+    "content": "We are a company dedicated to providing the best services in the world. Our mission is to..."
+  },
+  "guide": {
+    "title": "Guide",
+    "content": "This is a guide to help you understand how to use our service. First, you need to..."
+  },
+  "incognito": {
+    "title": "Incognito Mode Detected",
+    "message": "Incognito mode detected. Data will be lost when you close the browser.",
+    "button": "I Understand"
+  },
+  "mydecks": {
+    "title": "My Decks",
+    "button": "Go To"
+  },
+  "shareWithMe": {
+    "title": "Share With Me",
+    "button": "Go To"
+  },
+  "link": {
+    "home": "Home"
+  },
+  "feats": [
+    {
+      "title": "Feat 1",
+      "content": "This is a description for Feat 1. You can edit this content as needed.",
+      "image": "/images/img-for-banner-1.svg"
     },
-    "guide": {
-      "title": "Guide",
-      "content": "This is a guide to help you understand how to use our service. First, you need to..."
+    {
+      "title": "Feat 2",
+      "content": "This is a description for Feat 2. You can edit this content as needed.",
+      "image": "/images/img-for-banner-2.svg"
     },
-    "incognito": {
-      "title": "Incognito Mode Detected",
-      "message": "Incognito mode detected. Data will be lost when you close the browser.",
-      "button": "I Understand"
+    {
+      "title": "Feat 3",
+      "content": "This is a description for Feat 3. You can edit this content as needed.",
+      "image": "/images/img-for-banner-3.svg"
     }
-  }
-  
+  ]
+}

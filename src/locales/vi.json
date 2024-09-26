@@ -1,16 +1,43 @@
 {
-    "about": {
-      "title": "Về chúng tôi",
-      "content": "Chúng tôi là một công ty cam kết cung cấp dịch vụ tốt nhất trên thế giới. Sứ mệnh của chúng tôi là..."
+  "about": {
+    "title": "Về chúng tôi",
+    "content": "Chúng tôi là một công ty cam kết cung cấp dịch vụ tốt nhất trên thế giới. Sứ mệnh của chúng tôi là..."
+  },
+  "guide": {
+    "title": "Hướng dẫn",
+    "content": "Đây là hướng dẫn để giúp bạn hiểu cách sử dụng dịch vụ của chúng tôi. Đầu tiên, bạn cần..."
+  },
+  "incognito": {
+    "title": "Phát hiện tab ẩn danh",
+    "message": "Phát hiện tab ẩn danh. Dữ liệu được lưu sẽ biến mất khi bạn đóng trình duyệt.",
+    "button": "Tôi đã hiểu"
+  },
+  "mydecks": {
+    "title": "Deck của tôi",
+    "button": "Truy cập"
+  },
+  "shareWithMe": {
+    "title": "Được chia sẽ",
+    "button": "Truy cập"
+  },
+  "link": {
+    "home": "Trang chủ"
+  },
+  "feats": [
+    {
+      "title": "Tính năng 1",
+      "content": "Đây là mô tả cho tính năng 1. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
+      "image": "/images/img-for-banner-1.svg"
     },
-    "guide": {
-      "title": "Hướng dẫn",
-      "content": "Đây là hướng dẫn để giúp bạn hiểu cách sử dụng dịch vụ của chúng tôi. Đầu tiên, bạn cần..."
+    {
+      "title": "Tính năng 2",
+      "content": "Đây là mô tả cho tính năng 2. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
+      "image": "/images/img-for-banner-2.svg"
     },
-    "incognito": {
-      "title": "Phát hiện tab ẩn danh",
-      "message": "Phát hiện tab ẩn danh. Dữ liệu được lưu sẽ biến mất khi bạn đóng trình duyệt.",
-      "button": "Tôi đã hiểu"
+    {
+      "title": "Tính năng 3",
+      "content": "Đây là mô tả cho tính năng 3. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
+      "image": "/images/img-for-banner-3.svg"
     }
-  }
-  
+  ]
+}

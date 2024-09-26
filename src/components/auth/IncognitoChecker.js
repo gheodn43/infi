@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
-import './IncognitoChecker.css'; // Import CSS cho popup
+import './IncognitoChecker.css'; 
 
 const IncognitoChecker = () => {
   const [isIncognito, setIsIncognito] = useState(false);
