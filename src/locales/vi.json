@@ -23,6 +23,17 @@
   "link": {
     "home": "Trang chủ"
   },
+  "createdeckcustom": {
+    "title": "Tạo mới Deck",
+    "createbtn": "Tạo Deck",
+    "cancelbtn": "Hủy bỏ",
+    "error": "đã tồn tại."
+  },
+  "createdeckuploadfile": {
+    "title": "Tải lên File kịch bản",
+    "uploadbtn": "Nhập File",
+    "cancelbtn": "Hủy bỏ"
+  },
   "feats": [
     {
       "title": "Tính năng 1",

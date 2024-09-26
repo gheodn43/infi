@@ -23,6 +23,17 @@
   "link": {
     "home": "Home"
   },
+  "createdeckcustom": {
+    "title": "Create New Deck",
+    "createbtn": "Create Deck",
+    "cancelbtn": "Cancel",
+    "error": "already exists."
+  },
+  "createdeckuploadfile": {
+    "title": "Upload File's Deck Content",
+    "uploadbtn": "Upload File",
+    "cancelbtn": "Cancel"
+  },
   "feats": [
     {
       "title": "Feat 1",
