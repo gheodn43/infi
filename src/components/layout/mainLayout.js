@@ -3,6 +3,7 @@ import Logo from '../buttons/logo';
 import AboutLink from '../buttons/AboutLink';
 import GuideLink from '../buttons/GuideLink';
 import LanguageSwitcher from '../buttons/LanguageSwitcher';
+import Footer from '../footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -74,12 +75,10 @@ const mainLayout = (WrappedComponent) => {
                         </div>
                     )}
                 </header>
-                <main className="flex-fill mt-5 pt-5 px-2 px-md-3 px-lg-4 px-xl-5 min-vh-100">
+                <main className="flex-fill mt-5 py-5 px-2 px-md-3 px-lg-4 px-xl-5 min-vh-100">
                     <WrappedComponent {...props} />
                 </main>
-                <footer className="bg-dark">
-                    <p className="text-center text-white py-3">Footer</p>
-                </footer>
+                <Footer/>
             </div>
         );
     };
