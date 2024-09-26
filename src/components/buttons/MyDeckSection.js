@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-export default function ShareWithMe() {
+export default function MyDecks() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
