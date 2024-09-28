@@ -44,7 +44,7 @@ export default function AddCardPopup({ deck, onClose }) {
                             />
                         </div>
                         {isLayoutSettingVisible && (
-                            <div className="row px-3 mt-2">
+                            <div className="mt-2">
                                 <div className="mb-4 position-relative col-lg-6">
                                     <p className="position-absolute label1-cus mb-0">Front</p>
                                     <div className=" input-layout d-flex justify-content-center rounded-3">
