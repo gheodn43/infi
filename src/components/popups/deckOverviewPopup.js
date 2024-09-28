@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import AddCardPopup from "./AddCardPopup";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faX, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getDeck } from "../../localDB/db";
 
 export default function DeckOverviewPopup({ onClose, deck_id }) {
     const { t } = useTranslation();
     const [deck, setDeck] = useState(null);
+    const [isAddCardOpen, setIsAddCardOpen] = useState(false); // State để theo dõi xem AddCardPopup có mở không
 
     useEffect(() => {
         const fetchDeck = async () => {
@@ -17,9 +19,17 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
     }, [deck_id]);
 
     const handleOutsideClick = (event) => {
-        if (event.target.classList.contains("popup-overlay")) {
+        if (event.target.classList.contains("popup-overlay") && !isAddCardOpen) {
             onClose();
         }
+    };
+
+    const openAddCardPopup = () => {
+        setIsAddCardOpen(true);
+    };
+
+    const closeAddCardPopup = () => {
+        setIsAddCardOpen(false);
     };
 
     return (
@@ -28,22 +38,24 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
             onClick={handleOutsideClick}
         >
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded w-md-50">
-                <button type="button" className="btn-close text-light ms-auto" onClick={onClose}>
-                    <FontAwesomeIcon icon={faX} />
-                </button>
-                <div className="modal-header border-0 mb-3">
-                    <h5 className="modal-title">
-                        Deck: {deck ? deck.deck_name : t("loading")}
-                    </h5>
+                <div className="modal-header d-flex align-items-center justify-content-between">
+                    <h5 className="modal-title">Deck: {deck ? deck.deck_name : t("loading")}</h5>
+                    <button type="button" className="btn-close text-light ms-auto" onClick={onClose}>
+                        <FontAwesomeIcon icon={faX} />
+                    </button>
                 </div>
-                <div className="modal-body mx-0 mx-md-3 mx-lg-5 my-3 d-flex flex-column flex-md-row">
+                <div className="modal-body mx-0 mx-md-3 mx-lg-5 my-3 d-flex flex-md-row">
                     {deck ? (
                         <>
-                            <div className="w-md-75 d-flex flex-row align-content-center justify-content-between justify-content-md-center gap-3 gap-md-5">
+                            <div className="w-50 d-flex flex-row align-content-center justify-content-between gap-3 gap-md-5">
                                 <div>
                                     <p>{t("deckoverview.new_card")}:</p>
                                     <p>{t("deckoverview.learning_card")}:</p>
                                     <p>{t("deckoverview.review_card")}:</p>
+                                    <a onClick={openAddCardPopup} className="link-underline text-center text-primary" style={{ cursor: 'pointer' }}>
+                                        <FontAwesomeIcon icon={faPlus} className="mr-2" />
+                                        {t("deckoverview.addcard_link")}
+                                    </a>
                                 </div>
                                 <div>
                                     <p className="text-primary text-bold">{deck.new_count}</p>
@@ -51,14 +63,13 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
                                     <p className="text-success text-bold">{deck.overdue_count}</p>
                                 </div>
                             </div>
-                            <div className="flex-grow-1 text-end align-content-center text-md-start">
+                            <div className="flex-grow-1 text-end align-content-center">
                                 <button type="button" className="btn btn-light" disabled={!deck}>
                                     {t("deckoverview.studybtn")}
                                 </button>
                             </div>
                         </>
                     ) : (
-                        // Skeleton Loader
                         <div className="w-100 d-flex flex-row justify-content-between align-items-center">
                             <div className="skeleton w-75">
                                 <div className="skeleton-line mb-2" style={{ width: '60%', height: '1.2rem', backgroundColor: '#444' }}></div>
@@ -69,6 +80,11 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
                         </div>
                     )}
                 </div>
+
+                {isAddCardOpen && (
+                    <AddCardPopup deck={deck} onClose={closeAddCardPopup} />
+                )}
+
                 <div className="modal-footer"></div>
             </div>
         </div>

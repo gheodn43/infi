@@ -37,11 +37,15 @@ export default function CreateDeckCustomPopup({ onClose }) {
     return (
         <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1" onClick={handleOutsideClick}>
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded w-md-50">
-                <button type="button" className="btn-close text-light ms-auto" onClick={onClose}> <FontAwesomeIcon icon={faX} /> </button>
-                <div className="modal-header border-0 mb-3">
+
+                <div className="modal-header d-flex align-items-center justify-content-between">
                     <h5 className="modal-title">{t('createdeckcustom.title')}</h5>
+                    <button type="button" className="btn-close text-light" onClick={onClose}>
+                        <FontAwesomeIcon icon={faX} />
+                    </button>
                 </div>
-                <div className="modal-body mx-0 mx-md-3 mx-lg-5 my-3">
+
+                <div className="modal-body mx-0 mx-md-3 mx-lg-5 my-4">
                     <div className="position-relative">
                         <label htmlFor="deckName" className="position-absolute bg-dark label-cus">Deck Name</label>
                         <input
