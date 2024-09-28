@@ -9,6 +9,7 @@ class Deck {
         this.new_count = 0;
         this.learning_count = 0;
         this.overdue_count = 0;
+        this.cooling_count = 0;
         this.deck_properties = deck_properties;
         this.deck_last_update = this.getCurrentTimestamp();
     }
@@ -69,6 +70,7 @@ class Deck {
             new_count: this.new_count,
             learning_count: this.learning_count,
             overdue_count: this.overdue_count,
+            cooling_count: this.cooling_count,
             deck_properties: this.deck_properties,
             deck_last_update: this.deck_last_update,
         };

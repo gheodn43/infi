@@ -29,10 +29,17 @@
     "cancelbtn": "Hủy bỏ",
     "error": "đã tồn tại."
   },
+
   "createdeckuploadfile": {
     "title": "Tải lên File kịch bản",
     "uploadbtn": "Nhập File",
     "cancelbtn": "Hủy bỏ"
+  },
+  "deckoverview": {
+    "new_card": "Mới",
+    "learning_card": "Đang học",
+    "review_card": "Cần ôn tập",
+    "studybtn": "Học Ngay"
   },
   "feats": [
     {
