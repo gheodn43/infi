@@ -34,6 +34,12 @@
     "uploadbtn": "Upload File",
     "cancelbtn": "Cancel"
   },
+  "deckoverview": {
+    "new_card": "New",
+    "learning_card": "Learning",
+    "review_card": "To Review",
+    "studybtn": "Study Now"
+  },
   "feats": [
     {
       "title": "Feat 1",

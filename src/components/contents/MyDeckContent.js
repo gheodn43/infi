@@ -8,8 +8,8 @@ const MyDeckContent = () => {
   const decks = useLiveQuery(() => getDeckWithType('PRIVATE'));
 
   return (
-    <div className='px-2 px-lg-4'>
-      <h4>My Deck</h4>
+    <div className='container my-3'>
+      <h4 className='text-center'>My Decks</h4>
       {decks ? <DeckTree decks={decks} /> : <p>Loading...</p>}
       <CreateDeckButtons />
     </div>

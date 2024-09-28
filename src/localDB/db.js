@@ -1,10 +1,12 @@
 import Dexie from 'dexie';
 import Deck from '../model/deck';
+import Card from '../model/card';
 import { v4 as uuidv4 } from 'uuid';
 
 const db = new Dexie('DeckDatabase');
 db.version(1).stores({
-    decks: 'deck_id, deck_name, parent_deck_path, deck_status, deck_path, deck_type, new_count, learning_count, overdue_count, deck_properties, deck_last_update'
+    decks: 'deck_id, deck_name, parent_deck_path, deck_status, deck_path, deck_type, new_count, learning_count, overdue_count, cooling_count, deck_properties, deck_last_update',
+    cards: 'card_id, deck_id, front, back, difficulty, delay_value, step, avg_comp_time, status, again, hard, good, easy, overdue_at, created_at'
 });
 
 const addDeck = async (deck_name, deck_type) => {

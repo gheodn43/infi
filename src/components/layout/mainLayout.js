@@ -24,6 +24,7 @@ const mainLayout = (WrappedComponent) => {
         };
 
         useEffect(() => {
+            window.scrollTo(0, 0);
             document.addEventListener('mousedown', handleClickOutside);
             return () => {
                 document.removeEventListener('mousedown', handleClickOutside);
