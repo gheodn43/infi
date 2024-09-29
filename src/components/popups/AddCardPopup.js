@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PopupHeader from "./PopupHeader";
+import AddCardLayoutSetting from "./AddCardLayoutSetting";
+import AddCardInputPropertyPopup from "./AddCardInputPropertyPopup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faChevronDown, faAlignCenter, faAlignRight, faAlignLeft, faArrowRight, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown} from "@fortawesome/free-solid-svg-icons";
 
 export default function AddCardPopup({ deck, onClose }) {
     const [properties, setProperties] = useState(deck.deck_properties);
@@ -8,7 +11,31 @@ export default function AddCardPopup({ deck, onClose }) {
     const [isCardContentVisible, setIsCardContentVisible] = useState(true);
     const [isCustomLayoutFront, setIsCustomLayoutFront] = useState(false);
     const [isCustomLayoutBack, setIsCustomLayoutBack] = useState(false);
+    const [selectedBlockSize, setSelectedBlockSize] = useState(null);
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const layoutDefault = {
+        layoutType: "vertically", //vertically horizontally
+        alignment: "center", //left center right
+        blocks: []
+    }
+    const [frontBlocks, setFrontBlocks] = useState(layoutDefault);
+    const [backBlocks, setBackBlocks] = useState(layoutDefault);
 
+    useEffect(() => {
+        if (deck.layout_setting_front !== null) {
+            setIsCustomLayoutFront(true);
+            setFrontBlocks(deck.layout_setting_front);
+        } else {
+            setIsCustomLayoutFront(false);
+        }
+
+        if (deck.layout_setting_back !== null) {
+            setIsCustomLayoutBack(true);
+            setBackBlocks(deck.layout_setting_back);
+        } else {
+            setIsCustomLayoutBack(false);
+        }
+    }, []);
     const toggleLayoutSettingVisibility = () => {
         setIsLayoutSettingVisible(!isLayoutSettingVisible);
     };
@@ -16,118 +43,81 @@ export default function AddCardPopup({ deck, onClose }) {
         setIsCardContentVisible(!isCardContentVisible);
     };
     const toggleCustomLayoutBack = () => {
-        setIsCustomLayoutBack(!isCustomLayoutBack);
+        setBackBlocks(layoutDefault);
+        setIsCustomLayoutBack(true);
     };
     const toggleCustomLayoutFront = () => {
-        setIsCustomLayoutFront(!isCustomLayoutFront);
-    };
+        setFrontBlocks(layoutDefault);
+        setIsCustomLayoutFront(true);
 
+    };
+    const handleBlockSizeClick = (size) => {
+        setSelectedBlockSize(size);
+        setIsPopupVisible(true);
+    };
+    const handleChangeLayoutType = (newLayoutType) =>{
+        if(newLayoutType.side === "front"){
+            setFrontBlocks({ ...frontBlocks, layoutType: newLayoutType.layoutType });
+        }else{
+            setBackBlocks({ ...backBlocks, layoutType: newLayoutType.layoutType });
+        }
+    }
+    const handleChangAlignment = (newAlignment) =>{
+        if(newAlignment.side === "front"){
+            setFrontBlocks({ ...frontBlocks, alignment: newAlignment.alignment });
+            console.log(frontBlocks)
+        }else{
+            setBackBlocks({ ...backBlocks, alignment: newAlignment.alignment });
+        }
+    }
+    const handleCloseChildPopup = () => {
+        setIsPopupVisible(false);
+    }
+    const handlePropertySubmit = (newProperty) => {
+        if (!newProperty) return;
+        let updatedBlocks;
+        if(selectedBlockSize.side === "front"){
+            updatedBlocks = [...frontBlocks.blocks, { width: selectedBlockSize.size, property: newProperty }];
+            setFrontBlocks({ ...frontBlocks, blocks: updatedBlocks });
+        }else{
+            updatedBlocks = [...backBlocks.blocks, { width: selectedBlockSize.size, property: newProperty }];
+            setBackBlocks({ ...backBlocks, blocks: updatedBlocks });
+        }
+        if (!properties.includes(newProperty)) {
+            setProperties([...properties, newProperty]);
+        }
+        handleCloseChildPopup();
+    };
 
     return (
         <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-light bg-opacity-10 z-2">
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded h-75 position-relative overflow-hidden">
-                <div className="modal-header d-flex align-items-center justify-content-between">
-                    <h4 className="modal-title">Add Card to Deck: {deck.deck_name}</h4>
-                    <button type="button" className="btn-close text-light ms-auto" onClick={onClose}>
-                        <FontAwesomeIcon icon={faX} />
-                    </button>
-                </div>
+                <PopupHeader title={`Add Card to Deck: ${deck.deck_name}`} onClose={onClose} />
                 <div className="modal-body overflow-auto mt-3" style={{ maxHeight: 'calc(100% - 60px)' }}>
                     <div className="d-flex flex-column">
                         <div className="mb-4 d-flex flex-row align-items-center gap-2">
                             <p className="mb-0 h5">Layout setting</p>
-                            <FontAwesomeIcon
-                                icon={faChevronDown}
-                                className={isLayoutSettingVisible ? 'rotate-180' : ''}
-                                style={{ cursor: 'pointer' }}
-                                onClick={toggleLayoutSettingVisibility}
-                            />
+                            <FontAwesomeIcon icon={faChevronDown} className={isLayoutSettingVisible ? 'rotate-180' : ''} style={{ cursor: 'pointer' }} onClick={toggleLayoutSettingVisibility}/>
                         </div>
                         {isLayoutSettingVisible && (
-                            <div className="mt-2">
-                                <div className="mb-4 position-relative col-lg-6">
-                                    <p className="position-absolute label1-cus mb-0">Front</p>
-                                    <div className=" input-layout d-flex justify-content-center rounded-3">
-                                        {isCustomLayoutFront ? (
-                                            <div className="container-fluid">
-                                                <div className="text-black row p-2">
-                                                    <div className="col-xl-8 d-flex rounded-3 gap-1 mb-1">
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '20%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Small</p>
-                                                        </div>
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '30%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Medium</p>
-                                                        </div>
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '50%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Large</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-xl-4 d-flex flex-row gap-1 justify-content-end">
-                                                        <div ><FontAwesomeIcon icon={faArrowRight} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faArrowDown} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div className="text-white">|</div>
-                                                        <div ><FontAwesomeIcon icon={faAlignLeft} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faAlignCenter} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faAlignRight} className="rounded-1 bg-secondary p-1" /></div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-2">blocks are selected will display here</div>
-                                            </div>
-                                        ) : (
-                                            <p className="my-auto" style={{ cursor: 'pointer' }} onClick={toggleCustomLayoutFront}>Custom</p>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="mb-4 position-relative col-lg-6">
-                                    <p className="position-absolute label1-cus mb-0">Front</p>
-                                    <div className=" input-layout d-flex justify-content-center rounded-3">
-                                        {isCustomLayoutBack ? (
-                                            <div className="container-fluid">
-                                                <div className="text-black row p-2">
-                                                    <div className="col-xl-8 d-flex rounded-3 gap-1 mb-1">
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '20%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Small</p>
-                                                        </div>
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '30%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Medium</p>
-                                                        </div>
-                                                        <div className="bg-secondary rounded-1 d-flex justify-content-center" style={{ flexBasis: '50%' }}>
-                                                            <p className="my-auto" style={{ cursor: 'pointer' }}>Large</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-xl-4 d-flex flex-row gap-1 justify-content-end">
-                                                        <div ><FontAwesomeIcon icon={faArrowRight} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faArrowDown} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div className="text-white">|</div>
-                                                        <div ><FontAwesomeIcon icon={faAlignLeft} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faAlignCenter} className="rounded-1 bg-secondary p-1" /></div>
-                                                        <div ><FontAwesomeIcon icon={faAlignRight} className="rounded-1 bg-secondary p-1" /></div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-2">blocks are selected will display here</div>
-                                            </div>
-                                        ) : (
-                                            <p className="my-auto" style={{ cursor: 'pointer' }} onClick={toggleCustomLayoutBack}>Custom</p>
-                                        )}
-                                    </div>
-                                </div>
+                            <div className="mt-2 d-flex flex-column flex-lg-row gap-1">
+                                <AddCardLayoutSetting title="Front" side="front" blocks={frontBlocks} isCustomLayout={isCustomLayoutFront} 
+                                onToggleLayout={toggleCustomLayoutFront} onBlockSizeClick={handleBlockSizeClick} onLayoutTypeClick={handleChangeLayoutType}  onAlignmenteClick={handleChangAlignment}/>
+                                <AddCardLayoutSetting title="Back" side="back" blocks={backBlocks} isCustomLayout={isCustomLayoutBack} 
+                                onToggleLayout={toggleCustomLayoutBack} onBlockSizeClick={handleBlockSizeClick} onLayoutTypeClick={handleChangeLayoutType}  onAlignmenteClick={handleChangAlignment}/>
                             </div>
                         )}
                     </div>
                     <div className="mb-5 d-flex flex-row align-items-center gap-2">
                         <p className="mb-0 h5">Card's content</p>
-                        <FontAwesomeIcon
-                            icon={faChevronDown}
-                            className={isCardContentVisible ? 'rotate-180' : ''}
-                            style={{ cursor: 'pointer' }}
-                            onClick={toggleCardContentVisibility}
-                        />
+                        <FontAwesomeIcon icon={faChevronDown} className={isCardContentVisible ? 'rotate-180' : ''} style={{ cursor: 'pointer' }} onClick={toggleCardContentVisibility}/>
                     </div>
+                    {isPopupVisible && (
+                        <AddCardInputPropertyPopup properties={properties} onClose={handleCloseChildPopup} handlePropertySubmit={handlePropertySubmit}/>
+                    )}
                 </div>
                 <div className="modal-footer bg-dark position-absolute w-100 start-0 bottom-0 d-flex justify-content-end gap-2 py-3 px-4">
-                    <button type="button" className="btn btn-outline-secondary" onClick={onClose}>
-                        Finish
-                    </button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={onClose}> Finish </button>
                 </div>
             </div>
         </div>
