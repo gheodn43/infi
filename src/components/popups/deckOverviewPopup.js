@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import PopupHeader from "./PopupHeader";
 import AddCardPopup from "./AddCardPopup";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getDeck } from "../../localDB/db";
 
 export default function DeckOverviewPopup({ onClose, deck_id }) {
@@ -33,17 +34,11 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
     };
 
     return (
-        <div
-            className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1"
+        <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1"
             onClick={handleOutsideClick}
         >
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded w-md-50">
-                <div className="modal-header d-flex align-items-center justify-content-between">
-                    <h5 className="modal-title">Deck: {deck ? deck.deck_name : t("loading")}</h5>
-                    <button type="button" className="btn-close text-light ms-auto" onClick={onClose}>
-                        <FontAwesomeIcon icon={faX} />
-                    </button>
-                </div>
+                <PopupHeader title={deck ? deck.deck_name : t("loading")} onClose={onClose} />
                 <div className="modal-body mx-0 mx-md-3 mx-lg-5 my-3 d-flex flex-md-row">
                     {deck ? (
                         <>
@@ -84,8 +79,6 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
                 {isAddCardOpen && (
                     <AddCardPopup deck={deck} onClose={closeAddCardPopup} />
                 )}
-
-                <div className="modal-footer"></div>
             </div>
         </div>
     );

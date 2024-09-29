@@ -1,5 +1,5 @@
 class Deck {
-    constructor(deck_id, deck_name, parent_deck_path = '', deck_type, deck_properties = []) {
+    constructor(deck_id, deck_name, parent_deck_path = '', deck_type, deck_properties = [], layout_setting_front = null, layout_setting_back = null) {
         this.deck_id = deck_id;
         this.deck_name = deck_name;
         this.parent_deck_path = parent_deck_path || '';
@@ -11,6 +11,8 @@ class Deck {
         this.overdue_count = 0;
         this.cooling_count = 0;
         this.deck_properties = deck_properties;
+        this.layout_setting_front = layout_setting_front;
+        this.layout_setting_back = layout_setting_back;
         this.deck_last_update = this.getCurrentTimestamp();
     }
 
@@ -72,6 +74,8 @@ class Deck {
             overdue_count: this.overdue_count,
             cooling_count: this.cooling_count,
             deck_properties: this.deck_properties,
+            layout_setting_front: this.layout_setting_front,
+            layout_setting_back: this.layout_setting_back,
             deck_last_update: this.deck_last_update,
         };
     }
