@@ -8,11 +8,13 @@ export default function DeckTree({ decks }) {
     const handleDeckClick = (deck_id) => {
         setSelectedDeckId(deck_id); // Set the clicked deck's ID
         setShowPopup(true); // Show the popup
+        document.body.style.overflow = 'hidden';
     };
 
     const closePopup = () => {
         setShowPopup(false); // Close the popup
         setSelectedDeckId(null); // Clear selected deck
+        document.body.style.overflow = '';
     };
 
     return (

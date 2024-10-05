@@ -10,27 +10,31 @@ export default function CreateDeckButtons() {
 
     const handleCreateDeckClick = () => {
         setShowCustomPopup(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const handleUploadFileClick = () => {
         setShowImportPopup(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const closeCustomPopup = () => {
         setShowCustomPopup(false);
+        document.body.style.overflow = '';
     };
 
     const closeImportPopup = () => {
         setShowImportPopup(false);
+        document.body.style.overflow = '';
     };
 
     return (
         <div className="w-100 d-flex flex-row gap-4 align-content-center justify-content-center">
             <div className="btn btn-light" onClick={handleCreateDeckClick}>
-            {t('createdeckcustom.createbtn')}
+                {t('createdeckcustom.createbtn')}
             </div>
             <div className="btn btn-light" onClick={handleUploadFileClick}>
-            {t('createdeckuploadfile.uploadbtn')}
+                {t('createdeckuploadfile.uploadbtn')}
             </div>
             {showCustomPopup && (
                 <CreateDeckCustomPopup onClose={closeCustomPopup} />
