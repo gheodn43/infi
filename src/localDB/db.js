@@ -10,8 +10,16 @@ db.version(1).stores({
 });
 
 const addDeck = async (deck_name, deck_type) => {
+    const layoutDefault = {
+        layoutType: "vertically", 
+        alignment: "center", 
+        blocks: []
+    }
     const names = deck_name.split('::');
     let parentPath = '';
+    const deck_properties = [];
+    const layout_setting_front = layoutDefault;
+    const layout_setting_back = layoutDefault;
 
     for (let i = 0; i < names.length; i++) {
         const currentName = names[i].trim();
@@ -30,7 +38,9 @@ const addDeck = async (deck_name, deck_type) => {
                 currentName,
                 parentPath || null,
                 deck_type,
-                []
+                deck_properties,
+                layout_setting_front,
+                layout_setting_back
             );
             await db.decks.add(newDeck.getInfo());
         }

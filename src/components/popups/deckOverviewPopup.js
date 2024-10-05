@@ -47,10 +47,10 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
                                     <p>{t("deckoverview.new_card")}:</p>
                                     <p>{t("deckoverview.learning_card")}:</p>
                                     <p>{t("deckoverview.review_card")}:</p>
-                                    <a onClick={openAddCardPopup} className="link-underline text-center text-primary" style={{ cursor: 'pointer' }}>
+                                    <p onClick={openAddCardPopup} className="link-underline-info text-center text-primary" style={{ cursor: 'pointer' }}>
                                         <FontAwesomeIcon icon={faPlus} className="mr-2" />
                                         {t("deckoverview.addcard_link")}
-                                    </a>
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="text-primary text-bold">{deck.new_count}</p>

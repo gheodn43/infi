@@ -60,6 +60,9 @@ html body{
 .w-lg-50{
   width: 100%;
 }
+.h-md-75{
+  height: 100%;
+}
 
 .input-cus{
   padding: 0.5rem 1rem 0.5rem 1rem;
@@ -74,9 +77,9 @@ html body{
   color: #d9d9d9;
 }
 .label-cus{
-  top: -1.5rem;
+  top: -1rem;
   left: 0.5rem;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   font-weight: 600;
 }
 .label1-cus{
@@ -84,6 +87,9 @@ html body{
   left: 0.5rem;
   padding: 0.5rem;
   font-weight: 600;
+}
+.cursor-pointer{
+  cursor: pointer;
 }
 @media (min-width: 576px) { /* sm */
   .h-custom {
@@ -109,6 +115,9 @@ html body{
   }
   .w-lg-50{
     width: 100%;
+  }
+  .h-md-75{
+    height: 100%;
   }
 }
 
@@ -142,6 +151,9 @@ html body{
   .w-lg-50{
     width: 100%;
   }
+  .h-md-75{
+    height: 75%;
+  }
 }
 
 @media (min-width: 992px) { /* lg */
@@ -174,6 +186,9 @@ html body{
   }
   .w-lg-50{
     width: 50%;
+  }
+  .h-md-75{
+    height: 75%;
   }
 }
 
@@ -210,6 +225,9 @@ html body{
   }
   .w-lg-50{
     width: 50%;
+  }
+  .h-md-75{
+    height: 75%;
   }
 }
 .rotate-180 {
