@@ -291,3 +291,16 @@ footer{
 .border-b-2{
   border-bottom: #d9d9d9 solid 2px;
 }
+.fade-out {
+  animation: fadeOut 3s forwards; /* Thời gian fadeOut là 3 giây */
+  animation-delay: 2s; /* Đợi 2 giây trước khi bắt đầu fadeOut */
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1; /* Bắt đầu với độ mờ hoàn toàn */
+  }
+  100% {
+      opacity: 0; /* Kết thúc với độ mờ hoàn toàn */
+  }
+}

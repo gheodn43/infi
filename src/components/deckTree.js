@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import DeckOverviewPopup from "./popups/deckOverviewPopup";
 
 export default function DeckTree({ decks }) {
-    const [selectedDeckId, setSelectedDeckId] = useState(null); // State to track the selected deck
-    const [showPopup, setShowPopup] = useState(false); // State to track popup visibility
+    const [selectedDeckId, setSelectedDeckId] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleDeckClick = (deck_id) => {
-        setSelectedDeckId(deck_id); // Set the clicked deck's ID
-        setShowPopup(true); // Show the popup
+        setSelectedDeckId(deck_id);
+        setShowPopup(true);
         document.body.style.overflow = 'hidden';
     };
 
     const closePopup = () => {
-        setShowPopup(false); // Close the popup
-        setSelectedDeckId(null); // Clear selected deck
+        setShowPopup(false);
+        setSelectedDeckId(null);
         document.body.style.overflow = '';
     };
 

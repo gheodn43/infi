@@ -4,7 +4,7 @@ class Card {
         deck_id,
         front,
         back,
-        difficulty = 0, // 1 to 5
+        difficulty = 1, // 1 to 5
         delay_value = null,
         step = 0,
         avg_comp_time = [0, 0], // tổng thời gian học thẻ này, số lần đã học

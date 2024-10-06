@@ -11,8 +11,8 @@ db.version(1).stores({
 
 const addDeck = async (deck_name, deck_type) => {
     const layoutDefault = {
-        layoutType: "vertically", 
-        alignment: "center", 
+        layoutType: "vertically",
+        alignment: "center",
         blocks: []
     }
     const names = deck_name.split('::');
@@ -48,6 +48,63 @@ const addDeck = async (deck_name, deck_type) => {
     }
     return 'successfully';
 };
+const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlocks, quantityAdded) => {
+    const deck = await db.decks.get(deckId);
+    if (!deck) {
+        throw new Error(`Deck with ID "${deckId}" not found.`);
+    }
+    const newCount = deck.new_count + quantityAdded;
+    console.log(newCount);
+    console.log(properties);
+    console.log(frontBlocks);
+    console.log(backBlocks);
+    await db.decks.update(deckId, {
+        deck_properties: properties,
+        layout_setting_front: frontBlocks,
+        layout_setting_back: backBlocks,
+        new_count: newCount,
+        deck_last_update: new Date().toISOString()
+    });
+};
+
+
+const addCard = async (deck_id, usingProperties) => {
+    const frontProperties = [];
+    const backProperties = [];
+    usingProperties.forEach(({ property_name, property_value, used_at }) => {
+        if (property_value) {
+            if (used_at.includes('front')) {
+                frontProperties.push({
+                    property: property_name,
+                    value: property_value
+                });
+            }
+            if (used_at.includes('back')) {
+                backProperties.push({
+                    property: property_name,
+                    value: property_value
+                });
+            }
+        }
+    });
+    if (frontProperties.length === 0) {
+        return { status: 400, message: 'At least one field on the front of the card must have a value.' };
+    }
+    if (backProperties.length === 0) {
+        return { status: 400, message: 'At least one field on the back of the card must have a value.' };
+    }
+    const newCard = new Card(
+        uuidv4(),
+        deck_id,
+        frontProperties,
+        backProperties
+    );
+    
+    await db.cards.add(newCard.getInfo());
+    return { status: 200, message: 'Card added successfully' };
+};
+
+
 
 
 const getDeck = async (deck_id) => {
@@ -66,4 +123,4 @@ const getDeckWithType = async (deck_type) => {
     return await db.decks.where('deck_type').equals(deck_type).toArray();
 };
 
-export { db, addDeck, getDeck, deleteDeck, getAllDecks, getDeckWithType };
+export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard };
