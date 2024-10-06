@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 export default function Logo() {
     return (
         <div className="d-flex align-items-center">
-            <Link to="/" className="d-flex align-items-center text-decoration-none">
+            <Link to="/" className="d-flex align-items-center text-decoration-none" onClick={()=>{document.body.style.overflow = '';}}>
                 <img
                     className='h-custom mr-2'
                     src="/images/infi-logo.png"
