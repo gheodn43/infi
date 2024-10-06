@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PopupHeader from "./PopupHeader";
 import AddCardPopup from "./AddCardPopup";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getDeck } from "../../localDB/db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export default function DeckOverviewPopup({ onClose, deck_id }) {
     const { t } = useTranslation();
-    const [deck, setDeck] = useState(null);
-    const [isAddCardOpen, setIsAddCardOpen] = useState(false); // State để theo dõi xem AddCardPopup có mở không
-
-    useEffect(() => {
-        const fetchDeck = async () => {
-            const deck_response = await getDeck(deck_id);
-            setDeck(deck_response);
-        };
-        fetchDeck();
-    }, [deck_id]);
+    const [isAddCardOpen, setIsAddCardOpen] = useState(false); 
+    const deck = useLiveQuery(() => getDeck(deck_id));
 
     const handleOutsideClick = (event) => {
         if (event.target.classList.contains("popup-overlay") && !isAddCardOpen) {

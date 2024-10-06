@@ -1,9 +1,10 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import PopupHeader from "./PopupHeader";
 import AddCardLayoutSetting from "./AddCardLayoutSetting";
 import AddCardInputPropertyPopup from "./AddCardInputPropertyPopup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { addCard, updateDeckAfterAddCard } from "../../localDB/db";
 
 const initialState = {
     properties: [],
@@ -16,6 +17,8 @@ const initialState = {
     frontBlocks: null,
     backBlocks: null,
     usingProperties: [],
+    quantityAdded: 0,
+    messageError: null
 };
 
 // Khai báo reducer function
@@ -46,8 +49,12 @@ function reducer(state, action) {
             return { ...state, frontBlocks: action.payload };
         case "UPDATE_BACK_BLOCKS":
             return { ...state, backBlocks: action.payload };
-        case "UPDATE_USING_PROPERTIES": // Case để cập nhật usingProperties
+        case "UPDATE_USING_PROPERTIES":
             return { ...state, usingProperties: action.payload };
+        case "INCREASE_QUALITY_ADDED":
+            return { ...state, quantityAdded: state.quantityAdded + 1 };
+        case "SET_MESSAGE_ERR":
+            return { ...state, messageError: action.payload };
         default:
             return state;
     }
@@ -57,36 +64,57 @@ function reducer(state, action) {
 const createUsingProperties = (frontBlocks, backBlocks) => {
     const updatedUsingProperties = [];
 
-    // Xử lý backBlocks
-    if (backBlocks && backBlocks.blocks) {
-        backBlocks.blocks.forEach((block) => {
+    // Duyệt qua frontBlocks trước
+    if (frontBlocks && Array.isArray(frontBlocks.blocks)) {
+
+        if (frontBlocks.blocks.length === 0) {
             updatedUsingProperties.push({
-                property_name: block.property,
+                property_name: 'Front',
+                property_value: "",
+                used_at: "front",
+            });
+        } else {
+            frontBlocks.blocks.forEach((block) => {
+                updatedUsingProperties.push({
+                    property_name: block.property,
+                    property_value: "",
+                    used_at: "front",
+                });
+            });
+        }
+    }
+
+    // Sau đó duyệt qua backBlocks
+    if (backBlocks && Array.isArray(backBlocks.blocks)) {
+        if (backBlocks.blocks.length === 0) {
+            updatedUsingProperties.push({
+                property_name: 'Back',
                 property_value: "",
                 used_at: "back",
             });
-        });
-    }
-    if (frontBlocks && frontBlocks.blocks) {
-        frontBlocks.blocks.forEach((block) => {
-            const existingPropertyIndex = updatedUsingProperties.findIndex(
-                (prop) => prop.property_name === block.property
-            );
+        } else {
+            backBlocks.blocks.forEach((block) => {
+                const existingPropertyIndex = updatedUsingProperties.findIndex(
+                    (prop) => prop.property_name === block.property
+                );
 
-            if (existingPropertyIndex !== -1) {
-                updatedUsingProperties[existingPropertyIndex].used_at += ", front";
-            } else {
-                updatedUsingProperties.push({
-                    property_name: block.property,
-                    property_value: "", // Giá trị ban đầu là rỗng
-                    used_at: "front",
-                });
-            }
-        });
+                if (existingPropertyIndex !== -1) {
+                    updatedUsingProperties[existingPropertyIndex].used_at += ", back";
+                } else {
+                    updatedUsingProperties.push({
+                        property_name: block.property,
+                        property_value: "",
+                        used_at: "back",
+                    });
+                }
+            });
+        }
     }
 
     return updatedUsingProperties;
 };
+
+
 
 const updateUsingProperties = (property_name, used_at, currentUsingProperties) => {
     const existingPropertyIndex = currentUsingProperties.findIndex(
@@ -110,9 +138,10 @@ const updateUsingProperties = (property_name, used_at, currentUsingProperties) =
 
 export default function AddCardPopup({ deck, onClose }) {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const [messageVisible, setMessageVisible] = useState(false);
 
     useEffect(() => {
-        if (deck.layout_setting_front !== null) {
+        if (deck.layout_setting_front !== null && deck.layout_setting_front.blocks.length > 0) {
             dispatch({
                 type: "SET_CUSTOM_LAYOUT_FRONT",
                 payload: true,
@@ -120,7 +149,7 @@ export default function AddCardPopup({ deck, onClose }) {
             });
         }
 
-        if (deck.layout_setting_back !== null) {
+        if (deck.layout_setting_back !== null && deck.layout_setting_back.blocks.length > 0) {
             dispatch({
                 type: "SET_CUSTOM_LAYOUT_BACK",
                 payload: true,
@@ -128,13 +157,20 @@ export default function AddCardPopup({ deck, onClose }) {
             });
         }
         dispatch({ type: "SET_PROPERTIES", payload: deck.deck_properties });
+        const updatedUsingProperties = createUsingProperties(deck.layout_setting_front, deck.layout_setting_back);
+        dispatch({ type: "UPDATE_USING_PROPERTIES", payload: updatedUsingProperties });
     }, [deck]);
 
-    // Cập nhật usingProperties khi frontBlocks và backBlocks thay đổi
     useEffect(() => {
-        const updatedUsingProperties = createUsingProperties(state.frontBlocks, state.backBlocks);
-        dispatch({ type: "UPDATE_USING_PROPERTIES", payload: updatedUsingProperties });
-    }, [state.frontBlocks, state.backBlocks]);
+        if (state.messageError) {
+            setMessageVisible(true);
+            const timer = setTimeout(() => {
+                setMessageVisible(false);
+                dispatch({ type: "SET_MESSAGE_ERR", payload: "" });
+            }, 5000);
+            return () => clearTimeout(timer); 
+        }
+    }, [state.messageError]);
 
     const handleBlockSizeClick = (size) => {
         dispatch({ type: "SET_SELECTED_BLOCK_SIZE", payload: size });
@@ -188,13 +224,33 @@ export default function AddCardPopup({ deck, onClose }) {
     };
 
     const handleInputChange = (propertyName, value) => {
-        const updatedProperties = state.usingProperties.map(prop =>
-            prop.property_name === propertyName ? { ...prop, property_value: value } : prop
-        );
-        dispatch({ type: "UPDATE_USING_PROPERTIES", payload: updatedProperties });
+        const index = state.usingProperties.findIndex(prop => prop.property_name === propertyName);
+        if (index !== -1) {
+            const updatedProperties = [...state.usingProperties];
+            updatedProperties[index] = { ...updatedProperties[index], property_value: value };
+            dispatch({ type: "UPDATE_USING_PROPERTIES", payload: updatedProperties });
+        }
     };
 
-
+    const handleAddCardIntoDeck = async () => {
+        const response = await addCard(deck.deck_id, state.usingProperties);
+        if (response.status === 200) {
+            const resetUsingProperties = state.usingProperties.map(prop => ({
+                ...prop,
+                property_value: ""
+            }));
+            dispatch({ type: "UPDATE_USING_PROPERTIES", payload: resetUsingProperties });
+            dispatch({ type: "INCREASE_QUALITY_ADDED" })
+        } else {
+            dispatch({ type: "SET_MESSAGE_ERR", payload: response.message })
+        }
+    }
+    const handleFinish = async () => {
+        if (state.quantityAdded > 0) {
+            await updateDeckAfterAddCard(deck.deck_id, state.properties, state.frontBlocks, state.backBlocks, state.quantityAdded);
+        }
+        onClose();
+    }
     return (
         <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-light bg-opacity-10 z-2">
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded h-md-75 position-relative overflow-hidden">
@@ -216,7 +272,7 @@ export default function AddCardPopup({ deck, onClose }) {
                                     side="front"
                                     blocks={state.frontBlocks}
                                     isCustomLayout={state.isCustomLayoutFront}
-                                    onToggleLayout={() => dispatch({ type: "SET_CUSTOM_LAYOUT_FRONT", payload: true })}
+                                    onToggleLayout={() => dispatch({ type: "SET_CUSTOM_LAYOUT_FRONT", payload: true, blocks: deck.layout_setting_front })}
                                     onBlockSizeClick={handleBlockSizeClick}
                                     onLayoutTypeClick={handleChangeLayoutType}
                                     onAlignmenteClick={handleChangAlignment}
@@ -226,7 +282,7 @@ export default function AddCardPopup({ deck, onClose }) {
                                     side="back"
                                     blocks={state.backBlocks}
                                     isCustomLayout={state.isCustomLayoutBack}
-                                    onToggleLayout={() => dispatch({ type: "SET_CUSTOM_LAYOUT_BACK", payload: true })}
+                                    onToggleLayout={() => dispatch({ type: "SET_CUSTOM_LAYOUT_BACK", payload: true, blocks: deck.layout_setting_back })}
                                     onBlockSizeClick={handleBlockSizeClick}
                                     onLayoutTypeClick={handleChangeLayoutType}
                                     onAlignmenteClick={handleChangAlignment}
@@ -257,7 +313,6 @@ export default function AddCardPopup({ deck, onClose }) {
                                             id={usingProperty.property_name}
                                             type="text"
                                             value={usingProperty.property_value}
-                                            autoFocus
                                             placeholder={`Enter content for ${usingProperty.property_name}`}
                                             className="rounded-3 input-cus w-100"
                                             onChange={(e) => handleInputChange(usingProperty.property_name, e.target.value)}
@@ -275,10 +330,15 @@ export default function AddCardPopup({ deck, onClose }) {
                         />
                     )}
                 </div>
+
                 <div className="modal-footer bg-dark position-absolute w-100 start-0 bottom-0 d-flex justify-content-end gap-2 py-3 px-2">
-                    <button className="btn btn-light text-dark px-4 rounded-pill" onClick={onClose}>
-                        Save
-                    </button>
+                {messageVisible && (
+                        <div className="position-absolute d-flex justify-content-center w-100 py-1 bg-danger message-error fade-out" style={{ top: '-2rem' }}>
+                            {state.messageError}
+                        </div>
+                    )}
+                    <button type="button" className="btn btn-light fw-normal px-4" onClick={handleFinish}>Finish</button>
+                    <button type="button" className="btn btn-primary px-5" onClick={handleAddCardIntoDeck}> Add</button>
                 </div>
             </div>
         </div>

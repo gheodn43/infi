@@ -1,37 +1,48 @@
 import React, { useState } from "react";
 import DeckOverviewPopup from "./popups/deckOverviewPopup";
 
-export default function DeckTree({ decks }) {
-    const [selectedDeckId, setSelectedDeckId] = useState(null); // State to track the selected deck
-    const [showPopup, setShowPopup] = useState(false); // State to track popup visibility
+export default function DeckTree({ decks, showImg }) {
+    const [selectedDeckId, setSelectedDeckId] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleDeckClick = (deck_id) => {
-        setSelectedDeckId(deck_id); // Set the clicked deck's ID
-        setShowPopup(true); // Show the popup
-        document.body.style.overflow = 'hidden';
+        setSelectedDeckId(deck_id);
+        setShowPopup(true);
+        document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi popup mở
     };
 
     const closePopup = () => {
-        setShowPopup(false); // Close the popup
-        setSelectedDeckId(null); // Clear selected deck
-        document.body.style.overflow = '';
+        setShowPopup(false);
+        setSelectedDeckId(null);
+        document.body.style.overflow = ''; // Khôi phục cuộn trang khi popup đóng
     };
 
     return (
-        <div >
+        <div className="deck-tree-container">
             {decks.length === 0 ? (
                 <div className="text-center">
-                    <img
-                        src="/images/no-deck.png"
-                        alt="No Decks Available"
-                        className="img-not-found"
-                    />
-                    <p>Không có deck nào được tạo.</p>
+                    {showImg ? (
+                        <>
+                            <img
+                                src="/images/no-deck.png"
+                                alt="No Decks Available"
+                                className="img-not-found"
+                            />
+                            <p>Không có deck nào được tạo.</p>
+                        </>
+                    ) : (
+                        <p>Chưa tìm thấy Deck cho mục này</p>
+                    )}
                 </div>
             ) : (
-                <ul>
+                <ul className="deck-list">
                     {decks.map((deck) => (
-                        <li key={deck.deck_id} onClick={() => handleDeckClick(deck.deck_id)} style={{ cursor: 'pointer' }}>
+                        <li 
+                            key={deck.deck_id} 
+                            onClick={() => handleDeckClick(deck.deck_id)} 
+                            style={{ cursor: 'pointer' }}
+                            className="deck-item"
+                        >
                             {deck.deck_name}
                         </li>
                     ))}
