@@ -291,9 +291,22 @@ footer{
 .border-b-2{
   border-bottom: #d9d9d9 solid 2px;
 }
+.message-error {
+  animation: shake 0.5s ease forwards; /* Thêm hiệu ứng rung trong 0.5 giây */
+  animation-delay: 0s; /* Không cần delay cho hiệu ứng rung */
+}
+
 .fade-out {
   animation: fadeOut 3s forwards; /* Thời gian fadeOut là 3 giây */
   animation-delay: 2s; /* Đợi 2 giây trước khi bắt đầu fadeOut */
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 0); }
+  25% { transform: translate(-1px, 0); }
+  50% { transform: translate(1px, 0); }
+  75% { transform: translate(-1px, 0); }
+  100% { transform: translate(0, 0); }
 }
 
 @keyframes fadeOut {
@@ -304,3 +317,4 @@ footer{
       opacity: 0; /* Kết thúc với độ mờ hoàn toàn */
   }
 }
+

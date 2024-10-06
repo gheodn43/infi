@@ -10,7 +10,7 @@ const MyDeckContent = () => {
   return (
     <div className='container my-3'>
       <h4 className='text-center'>My Decks</h4>
-      {decks ? <DeckTree decks={decks} /> : <p>Loading...</p>}
+      {decks ? <DeckTree decks={decks} showImg={true}/> : <p>Loading...</p>}
       <CreateDeckButtons />
     </div>
   );
