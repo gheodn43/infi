@@ -168,7 +168,7 @@ export default function AddCardPopup({ deck, onClose }) {
                 setMessageVisible(false);
                 dispatch({ type: "SET_MESSAGE_ERR", payload: "" });
             }, 5000);
-            return () => clearTimeout(timer); 
+            return () => clearTimeout(timer);
         }
     }, [state.messageError]);
 
@@ -332,9 +332,10 @@ export default function AddCardPopup({ deck, onClose }) {
                 </div>
 
                 <div className="modal-footer bg-dark position-absolute w-100 start-0 bottom-0 d-flex justify-content-end gap-2 py-3 px-2">
-                {messageVisible && (
-                        <div className="position-absolute d-flex justify-content-center w-100 py-1 bg-danger message-error fade-out" style={{ top: '-2rem' }}>
-                            {state.messageError}
+                    {messageVisible && (
+                        <div className="position-absolute d-flex justify-content-center w-100 py-1 px-3 bg-danger message-error fade-out" style={{ top: '-3rem' }}>
+                            
+                            <p className="mb-0 text-center">{state.messageError}</p>
                         </div>
                     )}
                     <button type="button" className="btn btn-light fw-normal px-4" onClick={handleFinish}>Finish</button>
