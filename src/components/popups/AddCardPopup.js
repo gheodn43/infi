@@ -141,20 +141,19 @@ export default function AddCardPopup({ deck, onClose }) {
     const [messageVisible, setMessageVisible] = useState(false);
 
     useEffect(() => {
-        if (deck.layout_setting_front !== null && deck.layout_setting_front.blocks.length > 0) {
-            dispatch({
-                type: "SET_CUSTOM_LAYOUT_FRONT",
-                payload: true,
-                blocks: deck.layout_setting_front,
-            });
+        if (deck.layout_setting_front !== null) {
+            if (deck.layout_setting_front.blocks.length > 0)
+                dispatch({ type: "SET_CUSTOM_LAYOUT_FRONT", payload: true, blocks: deck.layout_setting_front });
+            else
+                dispatch({ type: "SET_CUSTOM_LAYOUT_FRONT", payload: false, blocks: deck.layout_setting_front });
         }
+        
+        if (deck.layout_setting_back !== null) {
+            if (deck.layout_setting_back.blocks.length > 0)
+                dispatch({ type: "SET_CUSTOM_LAYOUT_BACK", payload: true, blocks: deck.layout_setting_back });
+            else
+                dispatch({ type: "SET_CUSTOM_LAYOUT_BACK", payload: false, blocks: deck.layout_setting_back });
 
-        if (deck.layout_setting_back !== null && deck.layout_setting_back.blocks.length > 0) {
-            dispatch({
-                type: "SET_CUSTOM_LAYOUT_BACK",
-                payload: true,
-                blocks: deck.layout_setting_back,
-            });
         }
         dispatch({ type: "SET_PROPERTIES", payload: deck.deck_properties });
         const updatedUsingProperties = createUsingProperties(deck.layout_setting_front, deck.layout_setting_back);
@@ -334,7 +333,7 @@ export default function AddCardPopup({ deck, onClose }) {
                 <div className="modal-footer bg-dark position-absolute w-100 start-0 bottom-0 d-flex justify-content-end gap-2 py-3 px-2">
                     {messageVisible && (
                         <div className="position-absolute d-flex justify-content-center w-100 py-1 px-3 bg-danger message-error fade-out" style={{ top: '-3rem' }}>
-                            
+
                             <p className="mb-0 text-center">{state.messageError}</p>
                         </div>
                     )}
