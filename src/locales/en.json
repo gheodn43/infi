@@ -43,22 +43,19 @@
   },
   "feats": [
     {
-      "title": "Feat 1",
-      "content": "This is a description for Feat 1. You can edit this content as needed.",
-      "image": "/images/img-for-banner-1.svg"
+      "title": "Spaced Repetition",
+      "content": "Review times based on card difficulty, helping users learn more efficiently.",
+      "image": "/images/spaced-repetition.png"
     },
     {
-      "title": "Feat 2",
-      "content": "This is a description for Feat 2. You can edit this content as needed.",
-      "image": "/images/img-for-banner-2.svg"
+      "title": "Card Import",
+      "content":"Users import CSV/XLSX flashcards, customize attributes, and control what shows on each side.",
+      "image": "/images/flashcard.png"
     },
     {
-      "title": "Feat 3",
-      "content": "This is a description for Feat 3. You can edit this content as needed.",
-      "image": "/images/img-for-banner-3.svg"
+      "title": "Deck Sharing",
+      "content":"Users can quickly share flashcard decks via a link, allowing recipients to use or customize them.",
+      "image": "/images/desk-sharing.png"
     }
-  ],
-  "footer": {
-    "feature": "Feature"
-  }
+  ]
 }
