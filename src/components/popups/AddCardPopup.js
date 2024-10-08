@@ -260,14 +260,13 @@ export default function AddCardPopup({ deck, onClose }) {
         <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-light bg-opacity-10 z-2">
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded h-md-75 position-relative overflow-hidden">
                 <PopupHeader title={`Add Card to Deck: ${deck.deck_name}`} onClose={onClose} />
-                <div className="modal-body overflow-auto mt-3 mb-5" style={{ maxHeight: 'calc(100% - 60px)' }}>
+                <div className="modal-body overflow-auto mt-3 mb-5 cursor-pointer" style={{ maxHeight: 'calc(100% - 60px)' }}>
                     <div className="d-flex flex-column">
-                        <div className="mb-4 d-flex flex-row align-items-center gap-2">
+                        <div className="mb-4 d-flex flex-row align-items-center gap-2" onClick={() => dispatch({ type: "TOGGLE_LAYOUT_SETTING" })}>
                             <p className="mb-0 h5">Layout & Properties</p>
                             <FontAwesomeIcon
                                 icon={faChevronDown}
                                 className={`${state.isLayoutSettingVisible ? 'rotate-180' : ''} cursor-pointer`}
-                                onClick={() => dispatch({ type: "TOGGLE_LAYOUT_SETTING" })}
                             />
                         </div>
                         {state.isLayoutSettingVisible && (
@@ -296,12 +295,11 @@ export default function AddCardPopup({ deck, onClose }) {
                         )}
                     </div>
                     <div className="d-flex flex-column">
-                        <div className="mb-4 d-flex flex-row align-items-center gap-2">
+                        <div className="mb-4 d-flex flex-row align-items-center gap-2 cursor-pointer" onClick={() => dispatch({ type: "TOGGLE_CARD_CONTENT" })}>
                             <p className="mb-0 h5">Card's content</p>
                             <FontAwesomeIcon
                                 icon={faChevronDown}
                                 className={`${state.isCardContentVisible ? 'rotate-180' : ''} cursor-pointer`}
-                                onClick={() => dispatch({ type: "TOGGLE_CARD_CONTENT" })}
                             />
                         </div>
                         {state.isCardContentVisible && (

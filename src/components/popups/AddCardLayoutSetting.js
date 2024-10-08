@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignCenter, faAlignRight, faAlignLeft, faArrowRight, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import RenderBlock from "../RenderBlock";
-export default function AddCardLayoutSetting({ title, side, blocks, isCustomLayout, onToggleLayout, onBlockSizeClick, onLayoutTypeClick, onAlignmenteClick}) {
+export default function AddCardLayoutSetting({ title, side, blocks, isCustomLayout, onToggleLayout, onBlockSizeClick, onLayoutTypeClick, onAlignmenteClick }) {
     const SMALL_SIZE_BLOCK = '33%';
     const MEDIUM_SIZE_BLOCK = '66%';
     const LARGE_SIZZE_BLOCK = '100%';
@@ -10,7 +10,7 @@ export default function AddCardLayoutSetting({ title, side, blocks, isCustomLayo
     const ALIGN_LEFT = 'left';
     const ALIGN_CENTER = 'center';
     const ALIGN_RIGHT = 'right'
-    
+
     return (
         <div className="mb-4 position-relative flex-grow-1">
             <p className="position-absolute label1-cus mb-0">{title}</p>
@@ -70,9 +70,11 @@ export default function AddCardLayoutSetting({ title, side, blocks, isCustomLayo
                         </div>
                     </div>
                 ) : (
-                    <p className="my-auto cursor-pointer" onClick={onToggleLayout}>
-                        Custom
-                    </p>
+
+                        <p className="my-auto cursor-pointer py-3 px-5 w-100 text-center" onClick={onToggleLayout}>
+                            Custom
+                        </p>
+            
                 )}
             </div>
         </div>

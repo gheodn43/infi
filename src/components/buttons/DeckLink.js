@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function DeckLink () {
     return (
-        <a href="/deck" className="btn text-white mb-0">
+        <Link to="/deck" className="btn text-white mb-0">
             Deck
-        </a>
+        </Link>
     );
 };
 
