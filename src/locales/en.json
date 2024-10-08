@@ -57,5 +57,8 @@
       "content": "This is a description for Feat 3. You can edit this content as needed.",
       "image": "/images/img-for-banner-3.svg"
     }
-  ]
+  ],
+  "footer": {
+    "feature": "Feature"
+  }
 }

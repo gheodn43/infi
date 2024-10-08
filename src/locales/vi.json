@@ -58,5 +58,8 @@
       "content": "Đây là mô tả cho tính năng 3. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
       "image": "/images/img-for-banner-3.svg"
     }
-  ]
+  ],
+  "footer": {
+    "feature": "Chức năng"
+  }
 }
