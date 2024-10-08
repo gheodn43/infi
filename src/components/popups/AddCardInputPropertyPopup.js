@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PopupHeader from "./PopupHeader";
-import './popup.css'
 
 export default function AddCardInputPropertyPopup({ properties, onClose, handlePropertySubmit }) {
   const [property, setProperty] = useState('');

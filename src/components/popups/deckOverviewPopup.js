@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate và useLocation
 import PopupHeader from "./PopupHeader";
 import AddCardPopup from "./AddCardPopup";
 import { useTranslation } from "react-i18next";
@@ -9,8 +10,10 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 export default function DeckOverviewPopup({ onClose, deck_id }) {
     const { t } = useTranslation();
-    const [isAddCardOpen, setIsAddCardOpen] = useState(false); 
+    const [isAddCardOpen, setIsAddCardOpen] = useState(false);
     const deck = useLiveQuery(() => getDeck(deck_id));
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleOutsideClick = (event) => {
         if (event.target.classList.contains("popup-overlay") && !isAddCardOpen) {
@@ -26,8 +29,14 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
         setIsAddCardOpen(false);
     };
 
+    const handleStudy = () => {
+        const currentPath = location.pathname;
+        navigate(`${currentPath}/study`);
+    };
+
     return (
-        <div className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1"
+        <div
+            className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1"
             onClick={handleOutsideClick}
         >
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded w-md-50">
@@ -52,7 +61,7 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
                                 </div>
                             </div>
                             <div className="flex-grow-1 text-end align-content-center">
-                                <button type="button" className="btn btn-light" disabled={!deck}>
+                                <button type="button" className="btn btn-light" disabled={!deck} onClick={handleStudy}>
                                     {t("deckoverview.studybtn")}
                                 </button>
                             </div>

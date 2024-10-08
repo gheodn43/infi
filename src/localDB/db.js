@@ -54,10 +54,6 @@ const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlock
         throw new Error(`Deck with ID "${deckId}" not found.`);
     }
     const newCount = deck.new_count + quantityAdded;
-    console.log(newCount);
-    console.log(properties);
-    console.log(frontBlocks);
-    console.log(backBlocks);
     await db.decks.update(deckId, {
         deck_properties: properties,
         layout_setting_front: frontBlocks,
@@ -99,9 +95,29 @@ const addCard = async (deck_id, usingProperties) => {
         frontProperties,
         backProperties
     );
-    
+
     await db.cards.add(newCard.getInfo());
     return { status: 200, message: 'Card added successfully' };
+};
+
+
+//NEW_CARD LEARNING_CARD, REVIEW_CARD, COOLING_CARD
+const getCardOfDeck = async (deck_id) => {
+    const cards = await db.cards.where('deck_id').equals(deck_id).toArray();
+    const filteredCards = cards.filter(card => card.status !== 'COOLING_CARD');
+    const sortedCards = filteredCards.sort((a, b) => {
+        const statusPriority = {
+            'LEARNING_CARD': 1,
+            'REVIEW_CARD': 2,
+            'NEW_CARD': 3
+        };
+        return statusPriority[a.status] - statusPriority[b.status];
+    });
+    const result = sortedCards.map(card => ({
+        card,
+        timeToShow: Date.now() + 0
+    }));
+    return result;
 };
 
 
@@ -123,4 +139,4 @@ const getDeckWithType = async (deck_type) => {
     return await db.decks.where('deck_type').equals(deck_type).toArray();
 };
 
-export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard };
+export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard, getCardOfDeck};

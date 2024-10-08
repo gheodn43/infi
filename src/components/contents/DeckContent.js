@@ -5,11 +5,6 @@ import { useLiveQuery } from 'dexie-react-hooks';
 export default function DeckContent() {
     const myDecks = useLiveQuery(() => getDeckWithType('PRIVATE'));
     const shareWme = useLiveQuery(() => getDeckWithType('SHARE_WITH_ME'));
-
-    // Kiểm tra xem dữ liệu đang được tải hay không
-    const isLoadingMyDecks = myDecks === undefined;
-    const isLoadingShareWme = shareWme === undefined;
-
     return (
         <div className='container my-3 d-flex flex-column gap-2'>
             <div className=''>

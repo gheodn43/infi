@@ -13,7 +13,18 @@ html body{
   background-color: black;
   color: white;
 }
-
+.h-full{
+  height: 100vh;
+}
+.h-70{
+ height: 70vh;
+}
+.h-min-100{
+  min-height: 100vh;
+}
+.h-max-100{
+  max-height: 100vh;
+}
 .logo{
   height: 78px;
 }
@@ -63,7 +74,7 @@ html body{
 .h-md-75{
   height: 100%;
 }
-
+.w-md-25{width: 100%;}
 .input-cus{
   padding: 0.5rem 1rem 0.5rem 1rem;
   background-color: rgba(255, 255, 255, 0);
@@ -91,144 +102,78 @@ html body{
 .cursor-pointer{
   cursor: pointer;
 }
+
+.button-gradient {
+  background: linear-gradient(180deg, gray, black);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-gradient:hover {
+  background: linear-gradient(45deg,gray, black, gray);
+}
+
 @media (min-width: 576px) { /* sm */
-  .h-custom {
-    height: 60px;
-  }
-  .icon-size{
-    height: 36px;
-  }
-  .feat-h{
-    height: 34%;
-  }
-  .feat-img-h{
-    height: 12rem;
-  }
-  .footer-img{
-    width: 80%;
-  }
-  .img-not-found{
-    width: 70%;
-  }
-  .w-md-75{
-    width: 100%;
-  }
-  .w-lg-50{
-    width: 100%;
-  }
-  .h-md-75{
-    height: 100%;
-  }
+  .h-custom { height: 60px;}
+  .icon-size{ height: 36px;}
+  .feat-h{ height: 34%;}
+  .feat-img-h{ height: 12rem;}
+  .footer-img{ width: 80%;}
+  .img-not-found{ width: 70%;}
+  .w-md-75{ width: 100%;}
+  .w-lg-50{ width: 100%;}
+  .h-md-75{ height: 100%;}
+  .w-md-25{width: 100%;}
 }
 
 
 @media (min-width: 768px) { /* md */
-  .h-custom {
-    height: 65px;
-  }
-  .icon-size{
-    height: 41px;
-  }
-  .feat-h{
-    height: 50%;
-  }
-  .feat-img-h{
-   
-    height: 16rem;
-  }
-  .footer-img{
-    width: 80%;
-  }
-  .img-not-found{
-    width: 90%;
-  }
-  .w-md-50{
-    width: 50%;
-  }
-  .w-md-75{
-    width: 70%;
-  }
-  .w-lg-50{
-    width: 100%;
-  }
-  .h-md-75{
-    height: 75%;
-  }
+  .h-custom { height: 65px;}
+  .icon-size{ height: 41px;}
+  .feat-h{ height: 50%;}
+  .feat-img-h{height: 16rem;}
+  .footer-img{ width: 80%;}
+  .img-not-found{ width: 90%;}
+  .w-md-50{ width: 50%;}
+  .w-md-75{ width: 70%;}
+  .w-lg-50{ width: 100%;}
+  .h-md-75{ height: 75%;}
+  .w-md-25{width: 25%;}
 }
 
 @media (min-width: 992px) { /* lg */
-  .h-custom {
-    height: 70px;
-  }
-  .icon-size{
-    height: 46px;
-  }
-  .feat-h{
-    height: 60%;
-  }
-  .feat-img-h{
-    height: 20rem;
-  }
-  .footer-img{
-    width: 70%;
-  }
-  .footer-img-1{
-    width: 20%;
-  }
-  .img-not-found{
-    width: 50%;
-  }
-  .w-md-50{
-    width: 50%;
-  }
-  .w-md-75{
-    width: 70%;
-  }
-  .w-lg-50{
-    width: 50%;
-  }
-  .h-md-75{
-    height: 75%;
-  }
+  .h-custom { height: 70px; }
+  .icon-size{ height: 46px; }
+  .feat-h{ height: 60%; }
+  .feat-img-h{ height: 20rem; }
+  .footer-img{ width: 70%; }
+  .footer-img-1{ width: 20%; }
+  .img-not-found{ width: 50%; }
+  .w-md-50{ width: 50%; }
+  .w-md-75{ width: 70%; }
+  .w-lg-50{ width: 50%; }
+  .h-md-75{ height: 75%; }
+  .w-md-25{width: 25%;}
 }
 
 @media (min-width: 1200px) { /* xl */
-  .h-custom {
-    height: 78px;
-  }
-  .icon-size {
-    height: 54px;
-  }
-  .feat-h{
-    height: 70%;
-  }
-  .feat-img-h{
-    height: 22rem;
-  }
-  .footer-img{
-    width: 45%;
-    opacity: 0.3;
-    left: 50%;
-  }
-  .footer-img-1{
-    width: 28%;
-  }
-  .img-not-found{
-    width: 50%;
-    opacity: 0.7;
-  }
-  .w-md-50{
-    width: 50%;
-  }
-  .w-md-75{
-    width: 70%;
-  }
-  .w-lg-50{
-    width: 50%;
-  }
-  .h-md-75{
-    height: 75%;
-  }
+  .h-custom { height: 78px; }
+  .icon-size { height: 54px; }
+  .feat-h{ height: 70%; }
+  .feat-img-h{ height: 22rem; }
+  .footer-img{ width: 45%; opacity: 0.3; left: 50%; }
+  .footer-img-1{ width: 28%; }
+  .img-not-found{ width: 50%; opacity: 0.7; }
+  .w-md-50{ width: 50%; }
+  .w-md-75{ width: 70%; }
+  .w-lg-50{ width: 50%; }
+  .h-md-75{ height: 75%; }
+  .w-md-25{width: 25%;}
 }
 .rotate-180 {
   transform: rotate(180deg);
@@ -310,11 +255,12 @@ footer{
 }
 
 @keyframes fadeOut {
-  0% {
-      opacity: 1; /* Bắt đầu với độ mờ hoàn toàn */
+  0% {   opacity: 1; /* Bắt đầu với độ mờ hoàn toàn */
   }
   100% {
       opacity: 0; /* Kết thúc với độ mờ hoàn toàn */
   }
 }
+
+
 
