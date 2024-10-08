@@ -4,7 +4,7 @@ export default function Logo() {
         <div className="d-flex align-items-center">
             <Link to="/" className="d-flex align-items-center text-decoration-none" onClick={()=>{document.body.style.overflow = '';}}>
                 <img
-                    className='h-custom mr-2'
+                    className='h-custom mr-2 p-2'
                     src="/images/infi-logo.png"
                     alt="Infi Logo"
                     style={{ filter: 'brightness(0) invert(1)' }}

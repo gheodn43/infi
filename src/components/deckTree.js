@@ -1,20 +1,23 @@
 import React, { useState } from "react";
+import { useDeck } from "../providers/PetContext";
 import DeckOverviewPopup from "./popups/deckOverviewPopup";
 
 export default function DeckTree({ decks, showImg }) {
     const [selectedDeckId, setSelectedDeckId] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
+    const { updateDeck } = useDeck();
 
-    const handleDeckClick = (deck_id) => {
+    const handleDeckClick = (deck_id, deck_name, deck_type, deck_front_layout, deck_back_layout) => {
         setSelectedDeckId(deck_id);
         setShowPopup(true);
-        document.body.style.overflow = 'hidden'; // Ngăn cuộn trang khi popup mở
+        updateDeck({ deck_id: deck_id, deck_name: deck_name, deck_type: deck_type, deck_front_layout: deck_front_layout, deck_back_layout: deck_back_layout});
+        document.body.style.overflow = 'hidden';
     };
 
     const closePopup = () => {
         setShowPopup(false);
         setSelectedDeckId(null);
-        document.body.style.overflow = ''; // Khôi phục cuộn trang khi popup đóng
+        document.body.style.overflow = '';
     };
 
     return (
@@ -39,7 +42,7 @@ export default function DeckTree({ decks, showImg }) {
                     {decks.map((deck) => (
                         <li 
                             key={deck.deck_id} 
-                            onClick={() => handleDeckClick(deck.deck_id)} 
+                            onClick={() => handleDeckClick(deck.deck_id, deck.deck_name, deck.deck_type, deck.layout_setting_front, deck.layout_setting_back)} 
                             style={{ cursor: 'pointer' }}
                             className="deck-item"
                         >

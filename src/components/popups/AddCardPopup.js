@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect, useState } from "react";
+import { useDeck } from "../../providers/PetContext";
 import PopupHeader from "./PopupHeader";
 import AddCardLayoutSetting from "./AddCardLayoutSetting";
 import AddCardInputPropertyPopup from "./AddCardInputPropertyPopup";
@@ -139,6 +140,7 @@ const updateUsingProperties = (property_name, used_at, currentUsingProperties) =
 export default function AddCardPopup({ deck, onClose }) {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [messageVisible, setMessageVisible] = useState(false);
+    const { updateDeck } = useDeck(); 
 
     useEffect(() => {
         if (deck.layout_setting_front !== null) {
@@ -247,6 +249,10 @@ export default function AddCardPopup({ deck, onClose }) {
     const handleFinish = async () => {
         if (state.quantityAdded > 0) {
             await updateDeckAfterAddCard(deck.deck_id, state.properties, state.frontBlocks, state.backBlocks, state.quantityAdded);
+            updateDeck({
+                deck_front_layout: state.frontBlocks,
+                deck_back_layout: state.backBlocks
+            });
         }
         onClose();
     }
