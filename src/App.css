@@ -1,4 +1,3 @@
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -9,23 +8,29 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-html body{
+
+html body {
   background-color: black;
   color: white;
 }
-.h-full{
+
+.h-full {
   height: 100vh;
 }
-.h-70{
- height: 70vh;
+
+.h-70 {
+  height: 70vh;
 }
-.h-min-100{
+
+.h-min-100 {
   min-height: 100vh;
 }
-.h-max-100{
+
+.h-max-100 {
   max-height: 100vh;
 }
-.logo{
+
+.logo {
   height: 78px;
 }
 
@@ -33,73 +38,89 @@ html body{
   height: 55px;
 }
 
-.icon-size{
+.icon-size {
   height: 31px;
 }
 
-.feat-h{
+.feat-h {
   height: 30%;
 }
-.feat-img-h{
+
+.feat-img-h {
 
   height: 10rem;
 }
-.footer-img{
+
+.footer-img {
   width: 100%;
-  transform: scaleX(-1); 
-  opacity: 0.8; 
+  transform: scaleX(-1);
+  opacity: 0.8;
   right: 0;
   bottom: 0;
 }
-.footer-img-1{
+
+.footer-img-1 {
   width: 40%;
-  transform: scaleX(-1); 
-  opacity: 0.8; 
+  transform: scaleX(-1);
+  opacity: 0.8;
   left: 0;
   bottom: 0;
 }
-.img-not-found{
+
+.img-not-found {
   width: 90%;
   margin: auto;
 }
-.w-md-50{
+
+.w-md-50 {
   width: 100%;
 }
-.w-md-75{
+
+.w-md-75 {
   width: 100%;
 }
-.w-lg-50{
+
+.w-lg-50 {
   width: 100%;
 }
-.h-md-75{
+
+.h-md-75 {
   height: 100%;
 }
-.w-md-25{width: 100%;}
-.input-cus{
+
+.w-md-25 {
+  width: 100%;
+}
+
+.input-cus {
   padding: 0.5rem 1rem 0.5rem 1rem;
   background-color: rgba(255, 255, 255, 0);
   border: solid 1px white;
   color: #d9d9d9;
 }
-.input-layout{
+
+.input-layout {
   min-height: 5rem;
   background-color: rgba(255, 255, 255, 0);
   border: solid 1px white;
   color: #d9d9d9;
 }
-.label-cus{
+
+.label-cus {
   top: -1rem;
   left: 0.5rem;
   padding: 0 0.5rem;
   font-weight: 600;
 }
-.label1-cus{
+
+.label1-cus {
   top: -2rem;
   left: 0.5rem;
   padding: 0.5rem;
   font-weight: 600;
 }
-.cursor-pointer{
+
+.cursor-pointer {
   cursor: pointer;
 }
 
@@ -115,66 +136,209 @@ html body{
 }
 
 .button-gradient:hover {
-  background: linear-gradient(45deg,gray, black, gray);
+  background: linear-gradient(45deg, gray, black, gray);
 }
 
-@media (min-width: 576px) { /* sm */
-  .h-custom { height: 60px;}
-  .icon-size{ height: 36px;}
-  .feat-h{ height: 34%;}
-  .feat-img-h{ height: 12rem;}
-  .footer-img{ width: 80%;}
-  .img-not-found{ width: 70%;}
-  .w-md-75{ width: 100%;}
-  .w-lg-50{ width: 100%;}
-  .h-md-75{ height: 100%;}
-  .w-md-25{width: 100%;}
+@media (min-width: 576px) {
+
+  /* sm */
+  .h-custom {
+    height: 60px;
+  }
+
+  .icon-size {
+    height: 36px;
+  }
+
+  .feat-h {
+    height: 34%;
+  }
+
+  .feat-img-h {
+    height: 12rem;
+  }
+
+  .footer-img {
+    width: 80%;
+  }
+
+  .img-not-found {
+    width: 70%;
+  }
+
+  .w-md-75 {
+    width: 100%;
+  }
+
+  .w-lg-50 {
+    width: 100%;
+  }
+
+  .h-md-75 {
+    height: 100%;
+  }
+
+  .w-md-25 {
+    width: 100%;
+  }
 }
 
 
-@media (min-width: 768px) { /* md */
-  .h-custom { height: 65px;}
-  .icon-size{ height: 41px;}
-  .feat-h{ height: 50%;}
-  .feat-img-h{height: 16rem;}
-  .footer-img{ width: 80%;}
-  .img-not-found{ width: 90%;}
-  .w-md-50{ width: 50%;}
-  .w-md-75{ width: 70%;}
-  .w-lg-50{ width: 100%;}
-  .h-md-75{ height: 75%;}
-  .w-md-25{width: 25%;}
+@media (min-width: 768px) {
+
+  /* md */
+  .h-custom {
+    height: 65px;
+  }
+
+  .icon-size {
+    height: 41px;
+  }
+
+  .feat-h {
+    height: 50%;
+  }
+
+  .feat-img-h {
+    height: 16rem;
+  }
+
+  .footer-img {
+    width: 80%;
+  }
+
+  .img-not-found {
+    width: 90%;
+  }
+
+  .w-md-50 {
+    width: 50%;
+  }
+
+  .w-md-75 {
+    width: 70%;
+  }
+
+  .w-lg-50 {
+    width: 100%;
+  }
+
+  .h-md-75 {
+    height: 75%;
+  }
+
+  .w-md-25 {
+    width: 25%;
+  }
 }
 
-@media (min-width: 992px) { /* lg */
-  .h-custom { height: 70px; }
-  .icon-size{ height: 46px; }
-  .feat-h{ height: 60%; }
-  .feat-img-h{ height: 20rem; }
-  .footer-img{ width: 70%; }
-  .footer-img-1{ width: 20%; }
-  .img-not-found{ width: 50%; }
-  .w-md-50{ width: 50%; }
-  .w-md-75{ width: 70%; }
-  .w-lg-50{ width: 50%; }
-  .h-md-75{ height: 75%; }
-  .w-md-25{width: 25%;}
+@media (min-width: 992px) {
+
+  /* lg */
+  .h-custom {
+    height: 70px;
+  }
+
+  .icon-size {
+    height: 46px;
+  }
+
+  .feat-h {
+    height: 60%;
+  }
+
+  .feat-img-h {
+    height: 20rem;
+  }
+
+  .footer-img {
+    width: 70%;
+  }
+
+  .footer-img-1 {
+    width: 20%;
+  }
+
+  .img-not-found {
+    width: 50%;
+  }
+
+  .w-md-50 {
+    width: 50%;
+  }
+
+  .w-md-75 {
+    width: 70%;
+  }
+
+  .w-lg-50 {
+    width: 50%;
+  }
+
+  .h-md-75 {
+    height: 75%;
+  }
+
+  .w-md-25 {
+    width: 25%;
+  }
 }
 
-@media (min-width: 1200px) { /* xl */
-  .h-custom { height: 78px; }
-  .icon-size { height: 54px; }
-  .feat-h{ height: 70%; }
-  .feat-img-h{ height: 22rem; }
-  .footer-img{ width: 45%; opacity: 0.3; left: 50%; }
-  .footer-img-1{ width: 28%; }
-  .img-not-found{ width: 50%; opacity: 0.7; }
-  .w-md-50{ width: 50%; }
-  .w-md-75{ width: 70%; }
-  .w-lg-50{ width: 50%; }
-  .h-md-75{ height: 75%; }
-  .w-md-25{width: 25%;}
+@media (min-width: 1200px) {
+
+  /* xl */
+  .h-custom {
+    height: 78px;
+  }
+
+  .icon-size {
+    height: 54px;
+  }
+
+  .feat-h {
+    height: 70%;
+  }
+
+  .feat-img-h {
+    height: 22rem;
+  }
+
+  .footer-img {
+    width: 45%;
+    opacity: 0.3;
+    left: 50%;
+  }
+
+  .footer-img-1 {
+    width: 28%;
+  }
+
+  .img-not-found {
+    width: 50%;
+    opacity: 0.7;
+  }
+
+  .w-md-50 {
+    width: 50%;
+  }
+
+  .w-md-75 {
+    width: 70%;
+  }
+
+  .w-lg-50 {
+    width: 50%;
+  }
+
+  .h-md-75 {
+    height: 75%;
+  }
+
+  .w-md-25 {
+    width: 25%;
+  }
 }
+
 .rotate-180 {
   transform: rotate(180deg);
   transition: transform 0.3s ease;
@@ -182,14 +346,15 @@ html body{
 
 .link-underline {
   text-decoration: none;
-  color: gray; 
-  border-bottom: 2px solid transparent; 
-  transition: border-color 0.3s ease; 
+  color: gray;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
 .link-underline:hover {
   border-color: gray;
 }
+
 .button-cus-1 {
   background-color: #787f9930;
   transition: background-color 0.3s ease;
@@ -213,6 +378,7 @@ html body{
   background: linear-gradient(135deg, #B6F36A, #DCFFB0 50%);
   color: black;
 }
+
 .bg-primary-cus {
   background-color: #333645;
 }
@@ -221,46 +387,104 @@ html body{
   border-right: 2px solid white;
   height: 100%;
 }
-footer{
-  height: 40vh;
-  background-color: #333645;
+
+footer {
+  .footer {
+    background-color: #343a40; /* Màu nền tối */
+    color: white;
 }
 
-.text-bold{
+@media (max-width: 576px) { /* Mobile */
+    .footer {
+        height: 100vh; /* 100% chiều cao màn hình */
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) { /* Tablet */
+    .footer {
+        height: 70vh; /* 70% chiều cao màn hình */
+    }
+}
+
+@media (min-width: 769px) { /* Desktop */
+    .footer {
+        height: 50vh; /* 50% chiều cao màn hình */
+    }
+}
+
+/* Ẩn cột đầu tiên và cột thứ ba trên mobile và tablet */
+@media (max-width: 768px) {
+    .footer .col-md-3 {
+        display: none; /* Ẩn cột đầu tiên */
+    }
+
+    .footer .col-md-4 {
+        display: none; /* Ẩn cột thứ ba */
+    }
+
+    /* Căn giữa các cột còn lại */
+    .footer .row {
+        justify-content: center; /* Căn giữa */
+    }
+}
+}
+
+.text-bold {
   font-weight: 700;
 }
-.mr-2{
+
+.mr-2 {
   margin-right: 0.8rem;
 }
 
-.border-b-2{
+.border-b-2 {
   border-bottom: #d9d9d9 solid 2px;
 }
+
 .message-error {
-  animation: shake 0.5s ease forwards; /* Thêm hiệu ứng rung trong 0.5 giây */
-  animation-delay: 0s; /* Không cần delay cho hiệu ứng rung */
+  animation: shake 0.5s ease forwards;
+  /* Thêm hiệu ứng rung trong 0.5 giây */
+  animation-delay: 0s;
+  /* Không cần delay cho hiệu ứng rung */
 }
 
 .fade-out {
-  animation: fadeOut 3s forwards; /* Thời gian fadeOut là 3 giây */
-  animation-delay: 2s; /* Đợi 2 giây trước khi bắt đầu fadeOut */
+  animation: fadeOut 3s forwards;
+  /* Thời gian fadeOut là 3 giây */
+  animation-delay: 2s;
+  /* Đợi 2 giây trước khi bắt đầu fadeOut */
 }
 
 @keyframes shake {
-  0% { transform: translate(1px, 0); }
-  25% { transform: translate(-1px, 0); }
-  50% { transform: translate(1px, 0); }
-  75% { transform: translate(-1px, 0); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(1px, 0);
+  }
+
+  25% {
+    transform: translate(-1px, 0);
+  }
+
+  50% {
+    transform: translate(1px, 0);
+  }
+
+  75% {
+    transform: translate(-1px, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes fadeOut {
-  0% {   opacity: 1; /* Bắt đầu với độ mờ hoàn toàn */
+  0% {
+    opacity: 1;
+    /* Bắt đầu với độ mờ hoàn toàn */
   }
+
   100% {
-      opacity: 0; /* Kết thúc với độ mờ hoàn toàn */
+    opacity: 0;
+    /* Kết thúc với độ mờ hoàn toàn */
   }
 }
-
-
-
