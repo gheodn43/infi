@@ -49,13 +49,26 @@
     },
     {
       "title": "Card Import",
-      "content":"Users import CSV/XLSX flashcards, customize attributes, and control what shows on each side.",
+      "content": "Users import CSV/XLSX flashcards, customize attributes, and control what shows on each side.",
       "image": "/images/flashcard.png"
     },
     {
       "title": "Deck Sharing",
-      "content":"Users can quickly share flashcard decks via a link, allowing recipients to use or customize them.",
+      "content": "Users can quickly share flashcard decks via a link, allowing recipients to use or customize them.",
       "image": "/images/desk-sharing.png"
     }
-  ]
+  ],
+  "feet": {
+    "usefulLinks": "Useful links",
+    "deck": "Deck",
+    "share": "Share",
+    "guide": "Guide",
+    "contact": "Contact",
+    "company": "Company",
+    "termsAndConditions": "Terms and conditions",
+    "privacyPolicy": "Privacy policy",
+    "followUs":"Follow Us",
+    "submit": "Submit",
+    "des": "App Infi can study flashcards using the spaced repetition method, reviewing cards at calculated intervals based on their previous performance."
+  }
 }

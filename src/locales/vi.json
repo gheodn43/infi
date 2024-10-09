@@ -58,5 +58,20 @@
       "content": "Người dùng có thể nhanh chóng chia sẻ bộ thẻ ghi nhớ thông qua liên kết, cho phép người nhận sử dụng hoặc tùy chỉnh chúng.",
       "image": "/images/desk-sharing.png"
     }
-  ]
+  ],
+  "feet": {
+    "usefulLinks": "Đường dẫn",
+    "deck": "Deck",
+    "share": "Chia sẻ",
+    "guide": "Hướng dẫn",
+    "contact": "Liên hệ",
+    "company": "Công ty",
+    "termsAndConditions": "Điều khoản và điều kiện",
+    "privacyPolicy": "Chính sách bảo mật",
+    "followUs":"Mạng xã hội",
+    "submit": "Gửi",
+    "des":"App Infi có thể nghiên cứu các thẻ ghi nhớ bằng phương pháp lặp lại cách quãng, xem lại các thẻ theo các khoảng thời gian đã tính toán dựa trên hiệu suất trước đó của chúng."
+
+
+  }
 }
