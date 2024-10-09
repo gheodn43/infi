@@ -1,81 +1,96 @@
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
-import TextField from '@mui/material/TextField';
 import { Button } from "@mui/material";
 
 export default function Footer() {
-    const { t } = useTranslation(); // Nếu bạn muốn sử dụng i18next cho đa ngôn ngữ
+    const { t } = useTranslation();
     return (
         <footer className="d-flex flex-column justify-content-between position-relative p-md-2 bg-dark" style={{ padding: '20px 0' }}>
             <div className="container p-4 pb-0">
                 <section>
                     <div className="row justify-content-between">
-                        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 d-none d-md-block">
-                            <p>{t('feet.des')}</p>
+                        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <p className="text-secondary text-center text-md-start">{t('feet.des')}</p>
                         </div>
 
                         <hr className="w-100 clearfix d-md-none" />
 
                         <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 className="text-uppercase mb-4 font-weight-bold">{t('feet.usefulLinks')}</h6>
-                            <p><Link to="/" className="text-white text-decoration-none">Home</Link></p>
-                            <p><Link to="/deck/my-decks" className="text-white text-decoration-none">{t('feet.deck')}</Link></p>
-                            <p><Link to="/deck/share-with-me" className="text-white text-decoration-none">{t('feet.share')}</Link></p>
-                            <p><Link to="/guide" className="text-white text-decoration-none">{t('feet.guide')}</Link></p>
+                            <h6 className="text-uppercase mb-4 fw-bold text-center text-md-start">{t('feet.usefulLinks')}</h6>
+                            <div className="d-flex flex-row flex-md-column justify-content-center gap-5 gap-md-0">
+                                <div>
+                                    <p><Link to="/" className="text-white text-decoration-none">Home</Link></p>
+                                    <p><Link to="/deck/my-decks" className="text-white text-decoration-none">{t('feet.deck')}</Link></p>
+                                </div>
+                                <div>
+                                    <p><Link to="/deck/share-with-me" className="text-white text-decoration-none">{t('feet.share')}</Link></p>
+                                    <p><Link to="/guide" className="text-white text-decoration-none">{t('feet.guide')}</Link></p>
+                                </div>
+                            </div>
                         </div>
 
                         <hr className="w-100 clearfix d-md-none" />
 
-                        <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 className="text-uppercase mb-4 font-weight-bold">{t('feet.contact')}</h6>
-                            <p><i className="fas fa-envelope mr-3"></i> info@gmail.com</p>
-                            <p><i className="fas fa-phone mr-3"></i> +01 234 567 88</p>
-                            <h6 className="text-uppercase mb-4 font-weight-bold">{t('feet.company')}</h6>
-                            <p><Link to="/" className="text-white text-decoration-none">{t('feet.termsAndConditions')}</Link></p>
-                            <p><Link to="/" className="text-white text-decoration-none">{t('feet.privacyPolicy')}</Link></p>
+                        <div className="col-md-4 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 className="text-uppercase mb-4 fw-bold text-center text-md-start">{t('feet.contact')}</h6>
+                            <p className="text-center text-md-start"><i className="fas fa-envelope mr-3"></i> infiSRL2024@gmail.com</p>
+                            <p className="text-center text-md-start"><i className="fas fa-phone mr-3"></i> +84 79 498 2254</p>
+                            <h6 className="text-uppercase mb-4 fw-bold text-center text-md-start">{t('feet.company')}</h6>
+                            <p className="text-center text-md-start"><Link to="/" className="text-white text-decoration-none">{t('feet.termsAndConditions')}</Link></p>
+                            <p className="text-center text-md-start"><Link to="/" className="text-white text-decoration-none">{t('feet.privacyPolicy')}</Link></p>
 
                         </div>
 
                         <hr className="w-100 clearfix d-md-none" />
 
-                        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 className="text-uppercase mb-4 font-weight-bold">{t('feet.followUs')}</h6>
+                        <div className="col-md-2 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 className="text-uppercase mb-4 fw-bold text-center text-md-start">{t('feet.followUs')}</h6>
                             <div className="d-flex flex-column align-items-center">
                                 <div className="d-flex justify-content-center mb-3">
                                     <a className="btn btn-outline-light btn-floating m-1" role="button" href="https://facebook.com">
-                                        <i className="fab fa-facebook-f"></i>
+                                        <FontAwesomeIcon icon={faFacebook} />
                                     </a>
                                     <a className="btn btn-outline-light btn-floating m-1" role="button" href="https://twitter.com">
-                                        <i className="fab fa-twitter"></i>
+                                        <FontAwesomeIcon icon={faTwitter} />
                                     </a>
                                     <a className="btn btn-outline-light btn-floating m-1" role="button" href="https://google.com">
-                                        <i className="fab fa-google"></i>
+                                        <FontAwesomeIcon icon={faGoogle} />
                                     </a>
                                     <a className="btn btn-outline-light btn-floating m-1" role="button" href="https://instagram.com">
-                                        <i className="fab fa-instagram"></i>
+                                        <FontAwesomeIcon icon={faInstagram} />
                                     </a>
                                 </div>
+                                <div className="position-relative w-100 mb-4">
+                                    <label
+                                        htmlFor="fb_email"
+                                        className="position-absolute bg-dark label-cus"
+                                    >
+                                        Email
+                                    </label>
+                                    <input
+                                        id="fb_email"
+                                        type="text"
+                                        placeholder={`Enter your email`}
+                                        className="rounded-3 input-cus w-100"
+                                    />
+                                </div>
 
-                                <TextField
-                                    label="Email"
-                                    color="primary"
-                                    placeholder="Email"
-                                    focused
-                                    InputProps={{
-                                        style: { color: 'white' },
-                                    }}
-                                    style={{ marginBottom: '5px', width: '100%' }}
-                                />
-                                 <TextField
-                                    label="Feedback"
-                                    color="primary"
-                                    placeholder="Feedback"
-                                    focused
-                                    InputProps={{
-                                        style: { color: 'white' },
-                                    }}
-                                    style={{ marginBottom: '5px', width: '100%' }}
-                                />
+                                <div className="position-relative w-100 mb-4">
+                                    <label
+                                        htmlFor="fb_email"
+                                        className="position-absolute bg-dark label-cus"
+                                    >
+                                        Feadback
+                                    </label>
+                                    <textarea
+                                        id="fb_email"
+                                        rows="4"
+                                        placeholder={`Enter your Feedback`}
+                                        className="rounded-3 input-cus w-100"
+                                    />
+                                </div>
                                 <Button variant="contained" color="primary" style={{ width: '100%', marginBottom: '20px' }}>
                                     {t('feet.submit')}
                                 </Button>
