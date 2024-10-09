@@ -44,19 +44,19 @@
   },
   "feats": [
     {
-      "title": "Tính năng 1",
-      "content": "Đây là mô tả cho tính năng 1. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
-      "image": "/images/img-for-banner-1.svg"
+      "title": "Học Lặp Lại Ngắt Quãng",
+      "content": "Xem lại thời gian dựa trên độ khó của thẻ, giúp người dùng học hiệu quả hơn.",
+      "image": "/images/spaced-repetition.png"
     },
     {
-      "title": "Tính năng 2",
-      "content": "Đây là mô tả cho tính năng 2. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
-      "image": "/images/img-for-banner-2.svg"
+      "title": "Nhập Flashcard từ File CSV/XLSX",
+      "content": "Người dùng nhập thẻ ghi nhớ CSV/XLSX, tùy chỉnh thuộc tính và kiểm soát nội dung hiển thị ở mỗi mặt.",
+      "image": "/images/flashcard.png"
     },
     {
-      "title": "Tính năng 3",
-      "content": "Đây là mô tả cho tính năng 3. Bạn có thể chỉnh sửa nội dung này theo nhu cầu của mình.",
-      "image": "/images/img-for-banner-3.svg"
+      "title": "Chia Sẻ Bộ Flashcard với Người Dùng Khác",
+      "content": "Người dùng có thể nhanh chóng chia sẻ bộ thẻ ghi nhớ thông qua liên kết, cho phép người nhận sử dụng hoặc tùy chỉnh chúng.",
+      "image": "/images/desk-sharing.png"
     }
   ]
 }
