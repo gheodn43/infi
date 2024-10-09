@@ -13,6 +13,7 @@ html body{
   background-color: black;
   color: white;
 }
+.text-reponsive{font-size: small;}
 .h-full{
   height: 100vh;
 }
@@ -129,6 +130,7 @@ html body{
   .w-lg-50{ width: 100%;}
   .h-md-75{ height: 100%;}
   .w-md-25{width: 100%;}
+  .text-reponsive{font-size: small;}
 }
 
 
@@ -144,6 +146,7 @@ html body{
   .w-lg-50{ width: 100%;}
   .h-md-75{ height: 75%;}
   .w-md-25{width: 25%;}
+  .text-reponsive{font-size: medium;}
 }
 
 @media (min-width: 992px) { /* lg */
@@ -159,6 +162,7 @@ html body{
   .w-lg-50{ width: 50%; }
   .h-md-75{ height: 75%; }
   .w-md-25{width: 25%;}
+  .text-reponsive{font-size: medium;}
 }
 
 @media (min-width: 1200px) { /* xl */
@@ -174,6 +178,7 @@ html body{
   .w-lg-50{ width: 50%; }
   .h-md-75{ height: 75%; }
   .w-md-25{width: 25%;}
+  .text-reponsive{font-size: large;}
 }
 .rotate-180 {
   transform: rotate(180deg);
