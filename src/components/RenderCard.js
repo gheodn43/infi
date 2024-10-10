@@ -1,20 +1,21 @@
 import { useState, useEffect, useRef } from "react";
+import { updateCardById } from "../localDB/db";
 import RenderFOC from "./RenderFOC";
 import CardLevelBtn from "./buttons/CardLevelBtns";
 import CardShowAnswerBtn from "./buttons/CardShowAnswerBtn";
 
 export default function RenderCard({ card, onNextCard }) {
-    const [cardInfo, setCardInfo] = useState(null);
-    const [time, setTime] = useState(0); // Thời gian tính bằng giây
-    const [showAnswerBtn, setShowAnswerBtn] = useState(true); // Điều khiển hiển thị
-    const [isAnswerShown, setIsAnswerShown] = useState(false); // Xác định đã bấm show đáp án hay chưa
-    const [isFrontVisible, setIsFrontVisible] = useState(true); // Trạng thái hiển thị của mặt trước
-    const timerRef = useRef(null); // Tham chiếu để lưu interval ID
-    const backFaceRef = useRef(null); // Tham chiếu để di chuyển màn hình xuống backFace
+    const [currentCard, setCurrentCard] = useState(null);
+    const [time, setTime] = useState(0);
+    const [showAnswerBtn, setShowAnswerBtn] = useState(true);
+    const [isAnswerShown, setIsAnswerShown] = useState(false);
+    const [isFrontVisible, setIsFrontVisible] = useState(true); 
+    const timerRef = useRef(null); 
+    const backFaceRef = useRef(null); 
 
     useEffect(() => {
-        if (card && card.card) {
-            setCardInfo(card.card);
+        if (card) {
+            setCurrentCard(card);
             setShowAnswerBtn(true);
             setIsAnswerShown(false);
             setIsFrontVisible(true);
@@ -50,12 +51,10 @@ export default function RenderCard({ card, onNextCard }) {
         setIsAnswerShown(true);
 
         if (window.innerWidth >= 768) {
-            // Màn hình từ md trở lên
             if (backFaceRef.current) {
                 backFaceRef.current.scrollIntoView({ behavior: "smooth" });
             }
         } else {
-            // Màn hình nhỏ hơn md, switch giữa front và back
             setIsFrontVisible(false);
         }
     };
@@ -66,42 +65,89 @@ export default function RenderCard({ card, onNextCard }) {
         }
     };
 
-    if (!cardInfo) {
+    if (!currentCard) {
         return <p>Loading card...</p>;
     }
 
-    const frontFace = <div><RenderFOC faceData={cardInfo.front} face='front' /></div>;
-    const backFace = <div ref={backFaceRef}><RenderFOC faceData={cardInfo.back} face='back' /></div>;
+    const frontFace = <div><RenderFOC faceData={currentCard.front} face='front' /></div>;
+    const backFace = <div ref={backFaceRef}><RenderFOC faceData={currentCard.back} face='back' /></div>;
 
+    const handLevelClick = (level, value) => {
+        const timeToComp = time.toFixed(2);
+        const newDiff = currentCard.calculateDifficulty(timeToComp);
+        currentCard.updateDifficulty(newDiff);
+        switch (currentCard.step) {
+            case 0:
+                if (level === 'again' || level === 'hard' || level === 'good') {
+                    if (currentCard.status !== 'LEARNING_CARD')
+                        currentCard.changeStatusToLearning();
+                    const isSavedToHeap = true;
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                } else {
+                    currentCard.a(level);
+                    updateCardById(currentCard.card_id, currentCard);
+                    const isSavedToHeap = false;
+                    onNextCard(isSavedToHeap)
+                }
+                break;
+            case 1:
+                if (level === 'again' || level === 'hard') {
+                    if (currentCard.status !== 'LEARNING_CARD')
+                        currentCard.changeStatusToLearning();
+                    const isSavedToHeap = true;
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                } else {
+                    currentCard.a(level);
+                    updateCardById(currentCard.card_id, currentCard);
+                    const isSavedToHeap = false;
+                    onNextCard(isSavedToHeap)
+                }
+                break;
+            case 2:
+                if (level === 'again') {
+                    currentCard.a(level);
+                    const isSavedToHeap = true;
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                } else {
+                    currentCard.a(level);
+                    updateCardById(currentCard.card_id, currentCard);
+                    const isSavedToHeap = false;
+                    onNextCard(isSavedToHeap)
+                }
+                break;
+            default:
+                break;
+        }
+    }
     return (
         <div>
             <p>Time: {time.toFixed(2)} seconds</p>
             <div className="h-70" onClick={handleToggleFace}>
-            {window.innerWidth >= 768 ? (
-                <div>
-                    {frontFace}
-                    {isAnswerShown && (
-                        <>
-                            <hr className="border-t-4 border-white my-4" />
-                            {backFace}
-                        </>
-                    )}
-                </div>
-            ) : (
-                <div>
-                    {isFrontVisible ? frontFace : backFace}
-                </div>
-            )}
+                {window.innerWidth >= 768 ? (
+                    <div>
+                        {frontFace}
+                        {isAnswerShown && (
+                            <>
+                                <hr className="border-t-4 border-white my-4" />
+                                {backFace}
+                            </>
+                        )}
+                    </div>
+                ) : (
+                    <div>
+                        {isFrontVisible ? frontFace : backFace}
+                    </div>
+                )}
             </div>
             {showAnswerBtn ? (
                 <CardShowAnswerBtn onStopCounter={handleStopCounter} />
             ) : (
                 <CardLevelBtn
-                    step={cardInfo.step}
-                    again={cardInfo.again}
-                    hard={cardInfo.hard}
-                    good={cardInfo.good}
-                    easy={cardInfo.easy}
+                    again={currentCard.again}
+                    hard={currentCard.hard}
+                    good={currentCard.good}
+                    easy={currentCard.easy}
+                    onLevelClick={handLevelClick}
                 />
             )}
         </div>

@@ -1,51 +1,76 @@
 import { useDeck } from "../../providers/PetContext";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCardOfDeck } from "../../localDB/db";
+import Card from "../../model/card";
 import RenderCard from "../RenderCard";
-
 import { getHeap, selectCardTime, displayNextCard } from "../car.heap";
 
 export default function CardContent() {
     const { deck } = useDeck();
-    const [cards, setCards] = useState([]);
     const [currentCard, setCurrentCard] = useState(null);
-    useEffect(() => {
-        async function fetchCards() {
-            const cardList = await getCardOfDeck(deck.deck_id);
-            setCards(cardList);
-        }
 
+    useEffect(() => {
+        const fetchCards = async () => {
+            const cardList = await getCardOfDeck(deck.deck_id);
+            if (cardList && cardList.length > 0) {
+                cardList.forEach(item => {
+                    const newCard = new Card(
+                        item.card.card_id,
+                        item.card.deck_id,
+                        item.card.front,
+                        item.card.back,
+                        item.card.difficulty,
+                        item.card.delay_value,
+                        item.card.step,
+                        item.card.avg_comp_time,
+                        item.card.status,
+                        item.card.again,
+                        item.card.hard,
+                        item.card.good,
+                        item.card.easy,
+                        item.card.overdue_at,
+                        item.card.created_at
+                    ); 
+                    selectCardTime(newCard, 0)
+                });
+            }
+            const { status, card } = displayNextCard();
+            if (status === 'success') {
+                setCurrentCard(card);
+            } else if (status === 'empty') {
+                console.log("You are done!");
+            } 
+        };
         if (deck && deck.deck_id) {
             fetchCards();
         }
     }, [deck]);
 
-    // Xử lý khi người dùng chọn giá trị cho card
-    const handleNextCard = (al_card, selected_v) => {
-        selectCardTime(al_card, selected_v); // Thêm vào heap với thời gian đã chọn
-        // Nếu còn card trong danh sách ban đầu thì lấy card tiếp theo
-        if (cards.length > 1) {
-            setCards(cards.slice(1)); // Lấy card tiếp theo trong danh sách
-        } else {
-            // Khi hết danh sách ban đầu, bắt đầu lấy từ heap
-            const nextCardFromHeap = displayNextCard();
-            if (nextCardFromHeap) {
-                setCurrentCard(nextCardFromHeap);
-            } else {
-                setCurrentCard(null); // Không còn thẻ nào để hiển thị
-            }
+    const handleNextCard = async (isSavedToHeap, al_card, selected_v) => {
+        if (isSavedToHeap) {
+            selectCardTime(al_card, selected_v); 
+            console.log('save successfully');
+        }
+        
+        const { status, card } = displayNextCard(); 
+        if (status === 'success') {
+            setCurrentCard(card);
+            console.log('get new card');
+        } else if (status === 'empty') {
+            console.log("You are done!");
+            setCurrentCard(null);
         }
     };
-
-    // Chọn card hiện tại để hiển thị: ưu tiên card từ danh sách, nếu không thì từ heap
-    const cardToRender = cards.length > 0 ? cards[0] : currentCard;
+    
 
     return (
         <div className="my-3">
-            {cardToRender ? (
-                <RenderCard card={cardToRender} onNextCard={handleNextCard} />
+            {currentCard ? (
+                <RenderCard card={currentCard} onNextCard={handleNextCard} />
             ) : (
-                <p>No cards available</p>
+                <div className="container py-5 px-5">
+                    <h3 className="text-center">Congratulations! You have finished this deck for now.</h3>
+                </div>
             )}
         </div>
     );

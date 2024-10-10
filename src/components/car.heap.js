@@ -90,14 +90,15 @@ const selectCardTime = (card, selectedMinutes) => {
 
 const displayNextCard = () => {
     if (!minHeap.isEmpty()) {
-        const nextCard = minHeap.peek();
-        const currentTime = Date.now();
-        if (nextCard.timeToShow <= currentTime) {
-            minHeap.remove();
-            // Thêm logic để hiển thị thẻ
-        }
+        const nextCard = minHeap.remove(); // Gọi remove luôn, không cần peek
+        return { status: 'success', card: nextCard };
+    } else {
+        return { status: 'empty', card: null };
     }
 };
+
+
+
 
 const getHeap = () => {
     return minHeap.getHeap();

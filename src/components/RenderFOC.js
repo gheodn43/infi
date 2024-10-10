@@ -52,29 +52,40 @@ export default function RenderFOC({ faceData, face }) {
             alignItem = 'end';
             break;
     }
-
     const flexDirection = faceLayout.layoutType === 'vertically' ? 'column' : 'row';
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="d-flex container text-responsive py-1 rounded-2" style={{flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828'}}>
+        <div className="d-flex container text-responsive py-1 rounded-2" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828' }}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
-                    <div className="my-1 bg-black rounded-2" key={index} 
-                    style={{
-                        textAlign: alignItem,
-                        width: window.innerWidth <= 768 ? '100%' : block.width
-                    }}>
-                        <p className="mb-0 py-2">{values[index]}</p>
-                    </div>
+                    values[index] ? (
+                        <div
+                            className="my-1 bg-black rounded-2"
+                            key={index}
+                            style={{
+                                textAlign: alignItem,
+                                width: window.innerWidth <= 768 ? '100%' : block.width,
+                            }}
+                        >
+                            <p className="mb-0 py-2">{values[index]}</p>
+                        </div>
+                    ) : null 
                 ))
             ) : (
-                values.map(item => (
-                    <div className="my-1 bg-black rounded-2" style={{ width: '100%', textAlign: 'center'}}>
-                       <p className="mb-0 py-2">{item}</p>
-                    </div>
+                values.map((item, index) => (
+                    item ? (
+                        <div
+                            className="my-1 bg-black rounded-2"
+                            style={{ width: '100%', textAlign: 'center' }}
+                            key={index}
+                        >
+                            <p className="mb-0 py-2">{item}</p>
+                        </div>
+                    ) : null
                 ))
             )}
+
 
         </div>
     );

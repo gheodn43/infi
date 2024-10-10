@@ -120,6 +120,17 @@ const getCardOfDeck = async (deck_id) => {
     return result;
 };
 
+const updateCardById = async (card_id, updatedCard) => {
+    const card = await db.cards.get(card_id);
+    if (!card) {
+        throw new Error(`Card with ID "${card_id}" not found.`);
+    }
+    await db.cards.update(card_id, {
+        ...updatedCard
+    });
+    return { status: 200, message: 'Card updated successfully' };
+};
+
 
 
 
@@ -139,4 +150,4 @@ const getDeckWithType = async (deck_type) => {
     return await db.decks.where('deck_type').equals(deck_type).toArray();
 };
 
-export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard, getCardOfDeck};
+export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard, getCardOfDeck, updateCardById};
