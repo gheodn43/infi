@@ -1,8 +1,72 @@
 {
   "about": {
-    "title": "Về chúng tôi",
-    "content": "Chúng tôi là một công ty cam kết cung cấp dịch vụ tốt nhất trên thế giới. Sứ mệnh của chúng tôi là..."
+    "title": "Về Chúng Tôi"
   },
+  "content-about": [
+    {
+      "title": "Giới thiệu",
+      "content": [
+        "Infi là một ứng dụng web hiện đại được thiết kế để cách mạng hóa cách mà mọi người học và ghi nhớ thông tin. Với Infi, người dùng có thể tạo các thẻ flashcard cá nhân hóa phù hợp với nhu cầu riêng và tận dụng các kỹ thuật lặp lại cách quãng đã được chứng minh bằng khoa học để nâng cao khả năng ghi nhớ. Cách tiếp cận đổi mới này đảm bảo rằng kiến thức được tiếp thu hiệu quả hơn và ghi nhớ trong thời gian dài hơn. Cho dù bạn là một sinh viên chuẩn bị cho kỳ thi, một chuyên gia muốn mở rộng bộ kỹ năng của mình, hay một người học suốt đời cam kết với sự phát triển cá nhân, Infi đều thích ứng với thói quen học tập độc đáo của bạn, làm cho quá trình học trở nên dễ dàng hơn, thú vị hơn và hiệu quả hơn.",
+        "Infi cũng thúc đẩy một trải nghiệm học tập linh hoạt bằng cách cung cấp các tính năng đáp ứng nhiều mục tiêu giáo dục khác nhau. Bằng cách cho phép người dùng tập trung vào những lĩnh vực mà họ cần trợ giúp nhất và từ từ xây dựng kiến thức của mình, ứng dụng biến việc học thành một hoạt động dễ quản lý và bổ ích hơn."
+      ]
+    },
+    {
+      "title": "Sứ Mệnh và Tầm Nhìn",
+      "content": [
+        "Tại Infi, sứ mệnh của chúng tôi là chuyển đổi cách mọi người học bằng cách làm cho giáo dục thông minh hơn, cá nhân hóa hơn và hấp dẫn hơn. Chúng tôi cam kết cải thiện kết quả học tập thông qua việc sử dụng công nghệ đổi mới và các kỹ thuật đã được chứng minh như lặp lại cách quãng. Mục tiêu chính của chúng tôi là trao quyền cho những người học ở mọi độ tuổi và nền tảng bằng cách cung cấp cho họ các công cụ mạnh mẽ giúp họ tối đa hóa tiềm năng của mình.",
+        "Infi hình dung một thế giới nơi việc học là điều kiện dễ dàng cho mọi người, bất kể vị trí hay nguồn lực của họ. Bằng cách liên tục phát triển để đáp ứng nhu cầu của những người học hiện đại, chúng tôi hướng tới việc hỗ trợ mọi người đạt được mục tiêu giáo dục nhanh chóng và dễ dàng hơn. Tầm nhìn của chúng tôi là tạo ra một tương lai nơi người học trên toàn cầu có thể khai thác tiềm năng của mình và xuất sắc trong cuộc sống cá nhân và nghề nghiệp thông qua các công cụ học tập thông minh, thích ứng như Infi."
+      ]
+    },
+    {
+      "title": "Phương Pháp Học Tập",
+      "content": [
+        "Infi sử dụng kỹ thuật lặp lại cách quãng hiệu quả cao để tối ưu hóa khả năng ghi nhớ. Phương pháp này hoạt động bằng cách chia nhỏ các buổi học theo các khoảng thời gian đã được tính toán khoa học, trình bày mỗi thẻ flashcard cho người học ngay trước khi họ có khả năng quên thông tin. Mục tiêu là giảm thiểu thời gian dành cho việc ôn tập tài liệu mà người dùng đã nắm vững, đồng thời tối đa hóa khả năng ghi nhớ các khái niệm mới hoặc khó hơn.",
+        "Một trong những tính năng nổi bật của Infi là hỗ trợ các thẻ flashcard nhiều thuộc tính. Người dùng có thể tùy chỉnh thẻ của mình với nhiều thuộc tính khác nhau như mô tả, từ khóa, chú thích và ghi chú chi tiết. Điều này cho phép người học nghiên cứu nhiều lớp nội dung cùng một lúc—cho dù họ đang xử lý thuật ngữ phức tạp, giải thích sâu hoặc tóm tắt ngắn gọn—tất cả trong một nền tảng duy nhất. Bằng cách cung cấp định dạng phong phú và linh hoạt như vậy, Infi giúp người dùng xây dựng sự hiểu biết sâu sắc hơn về tài liệu và củng cố mối liên hệ giữa các khái niệm khác nhau, cuối cùng làm cho quá trình học tập trở nên hiệu quả và bổ ích hơn."
+      ]
+    },
+    {
+      "title": "Thuật Toán MS5",
+      "content": [
+        "Tại trung tâm của hệ thống lặp lại cách quãng của Infi là thuật toán MS5, một mô hình máy học tinh vi được thiết kế để dự đoán thời gian ôn tập tối ưu cho mỗi thẻ flashcard. Thuật toán phân tích nhiều yếu tố như hiệu suất người dùng, độ khó của thẻ, và hành vi học tập trước đó để điều chỉnh thông minh khoảng cách giữa các lần ôn tập.",
+        "Đối với các thẻ mà người dùng cảm thấy dễ, thuật toán sẽ tăng khoảng thời gian giữa các lần ôn tập, cho phép nhiều thời gian trôi qua trước buổi học tiếp theo. Đối với các thẻ khó hơn, nó sẽ rút ngắn khoảng thời gian ôn tập, đảm bảo rằng tài liệu khó được xem lại thường xuyên hơn cho đến khi hoàn toàn được nắm vững. Sự điều chỉnh động này không chỉ cá nhân hóa trải nghiệm học tập mà còn cải thiện đáng kể khả năng ghi nhớ lâu dài, giúp người dùng hồi tưởng thông tin quan trọng một cách chính xác và tự tin hơn.",
+        "Bằng cách sử dụng thuật toán MS5, Infi đảm bảo rằng người dùng dành thời gian học của họ một cách hiệu quả nhất có thể, tập trung vào những lĩnh vực cần sự chú ý nhiều nhất trong khi củng cố kiến thức hiện có theo cách có cấu trúc và hiệu quả."
+      ]
+    },
+    {
+      "title": "Tính Năng Chia Sẻ Bộ Thẻ",
+      "content": [
+        "Infi không chỉ là về việc học cá nhân—nó còn thúc đẩy sự hợp tác và chia sẻ kiến thức thông qua tính năng chia sẻ bộ thẻ. Người dùng có thể nhanh chóng và dễ dàng chia sẻ các bộ thẻ flashcard tùy chỉnh của họ với bạn bè, lớp học, hoặc đồng nghiệp thông qua một liên kết đơn giản. Cho dù bạn là một phần của nhóm học tập, chuẩn bị cho kỳ thi cùng bạn bè, hay làm việc với một đội ngũ chuyên nghiệp, Infi giúp việc phân phối tài nguyên học tập trở nên dễ dàng và tận dụng kiến thức tập thể.",
+        "Người nhận các bộ thẻ được chia sẻ có thể sử dụng chúng như vậy hoặc tùy chỉnh các thẻ để phù hợp với sở thích học tập cá nhân của họ. Sự linh hoạt này cho phép người dùng điều chỉnh tài liệu cho phong cách học của riêng mình trong khi vẫn được hưởng lợi từ nỗ lực tập thể của người khác. Tính năng chia sẻ bộ thẻ khuyến khích việc học tập cộng đồng, nơi người dùng có thể chia sẻ tài nguyên, học hỏi từ những hiểu biết của nhau và cùng nhau đạt được các mục tiêu học tập chung."
+      ]
+    },
+    {
+      "title": "Đội Ngũ",
+      "content": [
+        "Đằng sau Infi là một đội ngũ chuyên nghiệp tận tâm với việc nâng cao trải nghiệm học tập. Đội ngũ phát triển của chúng tôi tập hợp các chuyên gia trong lĩnh vực phát triển phần mềm, công nghệ giáo dục và thiết kế trải nghiệm người dùng, tất cả làm việc hướng tới mục tiêu chung là tạo ra một nền tảng học tập mạnh mẽ và trực quan. Mỗi thành viên trong đội ngũ mang đến chuyên môn độc đáo của họ, đảm bảo rằng Infi không chỉ hoạt động trơn tru mà còn mang lại trải nghiệm phong phú và bổ ích cho tất cả người dùng.",
+        "Đội ngũ của chúng tôi tin vào sức mạnh của việc học tập suốt đời và cam kết liên tục cải thiện Infi để đáp ứng nhu cầu đang phát triển của người học trên toàn cầu. Chúng tôi luôn khám phá các cách mới để nâng cao nền tảng, cho dù đó là bằng cách thêm các tính năng đổi mới, tinh chỉnh các công cụ hiện có, hoặc kết hợp phản hồi từ người dùng để đảm bảo rằng Infi luôn ở vị trí tiên phong trong công nghệ giáo dục."
+      ]
+    }
+  ],
+  "title-team": {
+    "descriptions": "Đội Ngũ Của Chúng Tôi"
+  },
+  "introduce-team": [
+    {
+      "name": "Nguyen Viet Anh Tuan",
+      "role": "Trưởng nhóm dự án",
+      "images": "/images/anhtuan.jpg"
+    },
+    {
+      "name": "Dinh Anh Phuc",
+      "role": "Nhà thiết kế & phát triển UI",
+      "images": "/images/phuc.jpg"
+    },
+    {
+      "name": "Phyo",
+      "role": "BA & Lập trình viên",
+      "images": "/images/woman.jpg"
+    }
+  ],
   "guide": {
     "title": "Hướng dẫn",
     "content": "Đây là hướng dẫn để giúp bạn hiểu cách sử dụng dịch vụ của chúng tôi. Đầu tiên, bạn cần..."
