@@ -71,7 +71,17 @@
     "followUs":"Mạng xã hội",
     "submit": "Gửi",
     "des":"App Infi có thể nghiên cứu các thẻ ghi nhớ bằng phương pháp lặp lại cách quãng, xem lại các thẻ theo các khoảng thời gian đã tính toán dựa trên hiệu suất trước đó của chúng."
-
-
+  },
+  "addCard": {
+    "title": "Thêm thẻ vào Deck: ",
+    "layoutProperty": "Tùy chỉnh thuộc tính",
+    "cardContent": "Nội dung thẻ",
+    "customBtn": "Tùy chỉnh",
+    "contentPlacehoder": "Thêm nội dung cho",
+    "finishBtn": "Hoàn tất",
+    "addBtn": "Thêm",
+    "lackOfFrontErr": "Ít nhất một trường ở mặt trước của thẻ phải có giá trị.",
+    "lackOfBackErr": "Ít nhất một trường ở mặt sau của thẻ phải có giá trị.",
+    "addSuccess": "Đã thêm một thẻ thành công."
   }
 }
