@@ -6,7 +6,7 @@ export default function RenderFOC({ faceData, face }) {
     const [FDT, setFDT] = useState(null);
     const [faceLayout, setFaceLayout] = useState(null);
     const [values, setValues] = useState(null);
-    const [isFaceLayoutReady, setIsFaceLayoutReady] = useState(false); // Thêm trạng thái để theo dõi khi faceLayout đã sẵn sàng
+    const [isFaceLayoutReady, setIsFaceLayoutReady] = useState(false);
 
     useEffect(() => {
         setFDT(faceData);
@@ -33,7 +33,6 @@ export default function RenderFOC({ faceData, face }) {
             const values = getValuesFromLayout(faceLayout, FDT);
             setValues(values);
             setIsFaceLayoutReady(true);
-            console.log(values)
         }
     }, [faceLayout, FDT, face]);
 
@@ -66,13 +65,13 @@ export default function RenderFOC({ faceData, face }) {
                         textAlign: alignItem,
                         width: window.innerWidth <= 768 ? '100%' : block.width
                     }}>
-                        <p className="text-center mb-0 py-2">{values[index]}</p>
+                        <p className="mb-0 py-2">{values[index]}</p>
                     </div>
                 ))
             ) : (
                 values.map(item => (
-                    <div style={{ width: '100%', textAlign: 'center', padding: '2px' }}>
-                       <p>{item}</p>
+                    <div className="my-1 bg-black rounded-2" style={{ width: '100%', textAlign: 'center'}}>
+                       <p className="mb-0 py-2">{item}</p>
                     </div>
                 ))
             )}
