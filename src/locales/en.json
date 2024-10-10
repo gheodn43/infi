@@ -1,8 +1,72 @@
 {
   "about": {
-    "title": "About Us",
-    "content": "We are a company dedicated to providing the best services in the world. Our mission is to..."
+    "title": "About Us"
   },
+  "content-about": [
+    {
+      "title": "Introduction",
+      "content": [
+        "Infi is a cutting-edge web application designed to revolutionize the way people learn and retain information. With Infi, users can create personalized flashcards tailored to their individual needs and leverage scientifically-proven spaced repetition techniques to enhance their memory retention. This innovative approach ensures that knowledge is acquired more efficiently and remembered for longer periods of time. Whether you're a student preparing for exams, a professional seeking to expand your skill set, or a lifelong learner committed to personal growth, Infi adapts to your unique learning habits, making the learning process more streamlined, enjoyable, and effective.",
+        "Infi also promotes a flexible learning experience by offering features that cater to a variety of educational goals. By allowing users to focus on areas they need the most help with and gradually building up their knowledge, the app turns studying into a more manageable and rewarding activity."
+      ]
+    },
+    {
+      "title": "Mission and Vision",
+      "content": [
+        "At Infi, our mission is to transform the way people learn by making education smarter, more personalized, and more engaging. We are committed to improving learning outcomes through the use of innovative technology and proven techniques like spaced repetition. Our primary goal is to empower learners of all ages and backgrounds by providing them with powerful tools that help them maximize their potential.",
+        "Infi envisions a world where learning is accessible to everyone, no matter their location or resources. By continuously evolving to meet the needs of modern learners, we aim to support people in achieving their educational goals faster and with greater ease. Our vision is to create a future where learners around the globe can tap into their potential and excel in their personal and professional lives through intelligent, adaptive learning tools like Infi."
+      ]
+    },
+    {
+      "title": "Learning Method",
+      "content": [
+        "Infi utilizes the highly effective technique of spaced repetition to optimize memory retention. This method works by spacing out study sessions at scientifically calculated intervals, presenting each flashcard to the learner just before they are likely to forget the information. The goal is to minimize time spent reviewing material that the user has already mastered while maximizing the retention of new or more difficult concepts.",
+        "One of Infi’s standout features is its support for multi-attribute flashcards. Users can customize their cards with various attributes such as descriptions, keywords, annotations, and detailed notes. This allows learners to study multiple layers of content at once—whether they’re tackling complex terminology, in-depth explanations, or concise summaries—all within a single platform. By offering such a rich and flexible format, Infi helps users build a deeper understanding of the material and strengthen connections between different concepts, ultimately making the learning process more effective and rewarding."
+      ]
+    },
+    {
+      "title": "MS5 Algorithm",
+      "content": [
+        "At the heart of Infi’s spaced repetition system is the MS5 algorithm, a sophisticated machine learning model designed to predict the optimal review time for each flashcard. The algorithm analyzes various factors such as user performance, card difficulty, and past study behaviors to intelligently adjust the spacing between reviews.",
+        "For cards that the user finds easy, the algorithm increases the interval between reviews, allowing more time to pass before the next study session. For more challenging cards, it shortens the review interval, ensuring that difficult material is revisited more frequently until it is fully mastered. This dynamic adjustment not only personalizes the learning experience but also significantly improves long-term retention, helping users recall important information with greater accuracy and confidence.",
+        "By using the MS5 algorithm, Infi ensures that users spend their study time as efficiently as possible, focusing on the areas that need the most attention while reinforcing existing knowledge in a structured and effective way."
+      ]
+    },
+    {
+      "title": "Deck Sharing Feature",
+      "content": [
+        "Infi is not just about individual learning—it also fosters collaboration and knowledge sharing through its deck-sharing feature. Users can quickly and easily share their custom flashcard decks with friends, classmates, or colleagues via a simple link. Whether you're part of a study group, preparing for an exam with your peers, or working with a professional team, Infi makes it effortless to distribute learning resources and benefit from collective knowledge.",
+        "Recipients of shared decks can use them as-is or customize the cards to fit their personal learning preferences. This flexibility allows users to adapt the material to their own study style while still benefiting from the collective effort of others. The deck-sharing feature encourages community-driven learning, where users can pool their resources, learn from each other’s insights, and work together to achieve common learning goals."
+      ]
+    },
+    {
+      "title": "Team",
+      "content": [
+        "Behind Infi is a dedicated team of professionals passionate about enhancing the learning experience. Our development team brings together experts in software development, education technology, and user experience design, all working towards the common goal of creating a robust and intuitive learning platform. Each team member brings their unique expertise to the table, ensuring that Infi not only functions seamlessly but also delivers an enriching and rewarding experience for all users.",
+        "Our team believes in the power of lifelong learning and is committed to continuously improving Infi to meet the evolving needs of learners around the world. We are always exploring new ways to enhance the platform, whether it’s by adding innovative features, refining existing tools, or incorporating user feedback to ensure that Infi remains at the forefront of educational technology."
+      ]
+    }
+  ],
+  "title-team": {
+    "descriptions": "The Team"
+  },
+  "introduce-team": [
+    {
+      "name": "Nguyen Viet Anh Tuan",
+      "role": "Leader of Project",
+      "images": "/images/anhtuan.jpg"
+    },
+    {
+      "name": "Dinh Anh Phuc",
+      "role": "UI designer & Developer",
+      "images": "/images/phuc.jpg"
+    },
+    {
+      "name": "Phyo",
+      "role": "BA & Developer",
+      "images": "/images/woman.jpg"
+    }
+  ],
   "guide": {
     "title": "Guide",
     "content": "This is a guide to help you understand how to use our service. First, you need to..."
@@ -67,7 +131,7 @@
     "company": "Company",
     "termsAndConditions": "Terms and conditions",
     "privacyPolicy": "Privacy policy",
-    "followUs":"Follow Us",
+    "followUs": "Follow Us",
     "submit": "Submit",
     "des": "App Infi can study flashcards using the spaced repetition method, reviewing cards at calculated intervals based on their previous performance."
   },
