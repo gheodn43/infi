@@ -8,7 +8,6 @@ export default function RenderFOC({ faceData, face }) {
     const [values, setValues] = useState(null);
     const [isFaceLayoutReady, setIsFaceLayoutReady] = useState(false); // Thêm trạng thái để theo dõi khi faceLayout đã sẵn sàng
 
-    // useEffect đầu tiên để thiết lập FDT và faceLayout
     useEffect(() => {
         setFDT(faceData);
         if (face === 'front') {
@@ -17,8 +16,6 @@ export default function RenderFOC({ faceData, face }) {
             setFaceLayout(deck?.deck_back_layout || {});
         }
     }, [faceData, face, deck]);
-
-    // useEffect thứ hai để lấy giá trị từ layout khi faceLayout đã sẵn sàng
     useEffect(() => {
         if (faceLayout) {
             const getValuesFromLayout = (layout, cardData) => {
@@ -61,16 +58,20 @@ export default function RenderFOC({ faceData, face }) {
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="container text-responsive" style={{ display: 'flex', flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap' }}>
+        <div className="d-flex container text-responsive py-1 rounded-2" style={{flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828'}}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
-                    <div key={index} style={{ width: block.width, textAlign: alignItem, padding: '2px' }}>
-                        <p>{values[index]}</p>
+                    <div className="my-1 bg-black rounded-2" key={index} 
+                    style={{
+                        textAlign: alignItem,
+                        width: window.innerWidth <= 768 ? '100%' : block.width
+                    }}>
+                        <p className="text-center mb-0 py-2">{values[index]}</p>
                     </div>
                 ))
             ) : (
                 values.map(item => (
-                    <div style={{ width: '100%', textAlign: alignItem, padding: '2px' }}>
+                    <div style={{ width: '100%', textAlign: 'center', padding: '2px' }}>
                        <p>{item}</p>
                     </div>
                 ))
