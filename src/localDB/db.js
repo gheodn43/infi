@@ -64,7 +64,7 @@ const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlock
 };
 
 
-const addCard = async (deck_id, usingProperties) => {
+const addCard = async (deck_id, usingProperties, t) => {
     const frontProperties = [];
     const backProperties = [];
     usingProperties.forEach(({ property_name, property_value, used_at }) => {
@@ -84,10 +84,10 @@ const addCard = async (deck_id, usingProperties) => {
         }
     });
     if (frontProperties.length === 0) {
-        return { status: 400, message: 'At least one field on the front of the card must have a value.' };
+        return { status: 400, message: t('addCard.lackOfFrontErr') };
     }
     if (backProperties.length === 0) {
-        return { status: 400, message: 'At least one field on the back of the card must have a value.' };
+        return { status: 400, message: t('addCard.lackOfBackErr') };
     }
     const newCard = new Card(
         uuidv4(),

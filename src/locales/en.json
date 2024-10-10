@@ -70,5 +70,17 @@
     "followUs":"Follow Us",
     "submit": "Submit",
     "des": "App Infi can study flashcards using the spaced repetition method, reviewing cards at calculated intervals based on their previous performance."
+  },
+  "addCard": {
+    "title": "Add Card to Deck: ",
+    "layoutProperty": "Layout & Properties",
+    "cardContent": "Card's content",
+    "customBtn": "Custom",
+    "contentPlacehoder": "Enter content for",
+    "finishBtn": "Finish",
+    "addBtn": "Add",
+    "lackOfFrontErr": "At least one field on the front of the card must have a value.",
+    "lackOfBackErr": "At least one field on the back of the card must have a value.",
+    "addSuccess": "Card added successfully."
   }
 }
