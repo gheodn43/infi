@@ -3,8 +3,8 @@ class MinHeap {
         this.heap = [];
     }
 
-    insert(card) {
-        this.heap.push(card);
+    insert(card, timeToShow) {
+        this.heap.push({ card, timeToShow });
         this.bubbleUp();
     }
 
@@ -71,9 +71,11 @@ class MinHeap {
     peek() {
         return this.heap[0];
     }
+
     isEmpty() {
         return this.heap.length === 0;
     }
+
     getHeap() {
         return this.heap;
     }
@@ -84,18 +86,16 @@ const minHeap = new MinHeap();
 const selectCardTime = (card, selectedMinutes) => {
     const currentTime = Date.now();
     const timeDelay = selectedMinutes * 60 * 1000;
-    card.timeToShow = currentTime + timeDelay;
-    minHeap.insert(card);
+    const timeToShow = currentTime + timeDelay;
+    minHeap.insert(card, timeToShow);
 };
 
 const displayNextCard = () => {
     if (!minHeap.isEmpty()) {
-        const nextCard = minHeap.peek();
-        const currentTime = Date.now();
-        if (nextCard.timeToShow <= currentTime) {
-            minHeap.remove();
-            // Thêm logic để hiển thị thẻ
-        }
+        const nextCard = minHeap.remove();
+        return { status: 'success', card: nextCard.card };
+    } else {
+        return { status: 'empty', card: null };
     }
 };
 

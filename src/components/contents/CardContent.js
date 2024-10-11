@@ -1,51 +1,118 @@
 import { useDeck } from "../../providers/PetContext";
-import { useState, useEffect } from "react";
-import { getCardOfDeck } from "../../localDB/db";
+import { useEffect, useState } from "react";
+import { getCardOfDeck, updateCardById } from "../../localDB/db";
+import Card from "../../model/card";
 import RenderCard from "../RenderCard";
-
 import { getHeap, selectCardTime, displayNextCard } from "../car.heap";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 export default function CardContent() {
+    const { t } = useTranslation();
     const { deck } = useDeck();
-    const [cards, setCards] = useState([]);
     const [currentCard, setCurrentCard] = useState(null);
-    useEffect(() => {
-        async function fetchCards() {
-            const cardList = await getCardOfDeck(deck.deck_id);
-            setCards(cardList);
-        }
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    useEffect(() => {
+        const fetchCards = async () => {
+            const cardList = await getCardOfDeck(deck.deck_id);
+            if (cardList && cardList.length > 0) {
+                cardList.forEach(card => {
+                    const newCard = new Card(
+                        card.card_id,
+                        card.deck_id,
+                        card.front,
+                        card.back,
+                        card.difficulty,
+                        card.delay_value,
+                        card.step,
+                        card.avg_comp_time,
+                        card.status,
+                        card.again,
+                        card.hard,
+                        card.good,
+                        card.easy,
+                        card.overdue_at,
+                        card.created_at
+                    );
+                    selectCardTime(newCard, 0);
+                });
+            }
+            const { status, card } = displayNextCard();
+            if (status === 'success') {
+                setCurrentCard(card);
+            } else if (status === 'empty') {
+                setCurrentCard(null);
+            }
+        };
         if (deck && deck.deck_id) {
             fetchCards();
         }
     }, [deck]);
 
-    // Xử lý khi người dùng chọn giá trị cho card
-    const handleNextCard = (al_card, selected_v) => {
-        selectCardTime(al_card, selected_v); // Thêm vào heap với thời gian đã chọn
-        // Nếu còn card trong danh sách ban đầu thì lấy card tiếp theo
-        if (cards.length > 1) {
-            setCards(cards.slice(1)); // Lấy card tiếp theo trong danh sách
-        } else {
-            // Khi hết danh sách ban đầu, bắt đầu lấy từ heap
-            const nextCardFromHeap = displayNextCard();
-            if (nextCardFromHeap) {
-                setCurrentCard(nextCardFromHeap);
-            } else {
-                setCurrentCard(null); // Không còn thẻ nào để hiển thị
-            }
+    useEffect(() => {
+        console.log('called')
+        if(currentCard){
+            const handleBeforeUnload = (event) => {
+                const confirmationMessage = t('cardContent.exitMessageDefault');
+                event.returnValue = confirmationMessage;
+                return confirmationMessage;
+            };
+    
+            window.addEventListener('beforeunload', handleBeforeUnload);
+    
+            return () => {
+                window.removeEventListener('beforeunload', handleBeforeUnload);
+            };
+        }
+        return;
+    }, [currentCard,t]);
+
+    const handleNextCard = async (isSavedToHeap, al_card, selected_v) => {
+        if (isSavedToHeap) {
+            selectCardTime(al_card, selected_v);
+        }
+        const { status, card } = displayNextCard();
+        if (status === 'success') {
+            setCurrentCard(card);
+        } else if (status === 'empty') {
+            setCurrentCard(null);
         }
     };
 
-    // Chọn card hiện tại để hiển thị: ưu tiên card từ danh sách, nếu không thì từ heap
-    const cardToRender = cards.length > 0 ? cards[0] : currentCard;
+    const handleExit = async () => {
+        if (currentCard) {
+            const waitingCardCount = getHeap().length + 1;
+            const confirmationMessage = `${waitingCardCount} ${t('cardContent.exitMessage')}`;
+            if (window.confirm(confirmationMessage)) {
+                updateCardById(currentCard.card_id, currentCard);
+                const waitingCards = getHeap();
+                if (waitingCards.length > 0) {
+                    waitingCards.map(card => updateCardById(card.card_id, card));
+                }
+                const newUrl = location.pathname.replace('/study', '');
+                navigate(newUrl);
+            }
+        } else {
+            const newUrl = location.pathname.replace('/study', '');
+            navigate(newUrl);
+        }
+    };
 
     return (
         <div className="my-3">
-            {cardToRender ? (
-                <RenderCard card={cardToRender} onNextCard={handleNextCard} />
+            <div className='p-2 d-flex justify-content-end fixed-top'>
+                <div className='px-2 py-1 bg-secondary rounded-2 cursor-pointer' onClick={handleExit}>
+                    {t('cardContent.exitBtn')}
+                </div>
+            </div>
+            {currentCard ? (
+                <RenderCard card={currentCard} onNextCard={handleNextCard} />
             ) : (
-                <p>No cards available</p>
+                <div className="container py-5 px-5">
+                    <h3 className="text-center">{t('cardContent.congratulations')}</h3>
+                </div>
             )}
         </div>
     );

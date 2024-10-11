@@ -73,6 +73,9 @@ class Card {
         this.good = '1d';
         this.easy = '3d';
     }
+    changeStatusToLearning(){
+        this.status = 'LEARNING_CARD';
+    }
     update_avg_comp_time(timeInSeconds) {
         const timeToAdd = Math.min(timeInSeconds, 15.00);
         this.avg_comp_time[0] += timeToAdd;

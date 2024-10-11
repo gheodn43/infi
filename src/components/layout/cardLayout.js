@@ -15,9 +15,7 @@ const cardLayout = (WrappedComponent) => {
                         <h5 className='fw-bold mb-0'>Infi</h5>
                     </div>
                     <h5 className=''>{deck.deck_name}</h5>
-                    <div className='px-2 py-1 bg-secondary rounded-2'>
-                        Exit
-                    </div>
+                    <div className='px-4 py-1'></div>
                 </div>
                 <main className="content flex-fill">
                     <WrappedComponent {...props} />

@@ -6,7 +6,7 @@ export default function RenderFOC({ faceData, face }) {
     const [FDT, setFDT] = useState(null);
     const [faceLayout, setFaceLayout] = useState(null);
     const [values, setValues] = useState(null);
-    const [isFaceLayoutReady, setIsFaceLayoutReady] = useState(false); // Thêm trạng thái để theo dõi khi faceLayout đã sẵn sàng
+    const [isFaceLayoutReady, setIsFaceLayoutReady] = useState(false);
 
     useEffect(() => {
         setFDT(faceData);
@@ -33,7 +33,6 @@ export default function RenderFOC({ faceData, face }) {
             const values = getValuesFromLayout(faceLayout, FDT);
             setValues(values);
             setIsFaceLayoutReady(true);
-            console.log(values)
         }
     }, [faceLayout, FDT, face]);
 
@@ -53,29 +52,40 @@ export default function RenderFOC({ faceData, face }) {
             alignItem = 'end';
             break;
     }
-
     const flexDirection = faceLayout.layoutType === 'vertically' ? 'column' : 'row';
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="d-flex container text-responsive py-1 rounded-2" style={{flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828'}}>
+        <div className="d-flex container text-responsive py-1 rounded-2" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828' }}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
-                    <div className="my-1 bg-black rounded-2" key={index} 
-                    style={{
-                        textAlign: alignItem,
-                        width: window.innerWidth <= 768 ? '100%' : block.width
-                    }}>
-                        <p className="text-center mb-0 py-2">{values[index]}</p>
-                    </div>
+                    values[index] ? (
+                        <div
+                            className="my-1 bg-black rounded-2"
+                            key={index}
+                            style={{
+                                textAlign: alignItem,
+                                width: window.innerWidth <= 768 ? '100%' : block.width,
+                            }}
+                        >
+                            <p className="mb-0 py-2">{values[index]}</p>
+                        </div>
+                    ) : null
                 ))
             ) : (
-                values.map(item => (
-                    <div style={{ width: '100%', textAlign: 'center', padding: '2px' }}>
-                       <p>{item}</p>
-                    </div>
+                values.map((item, index) => (
+                    item ? (
+                        <div
+                            className="my-1 bg-black rounded-2"
+                            style={{ width: '100%', textAlign: 'center' }}
+                            key={index}
+                        >
+                            <p className="mb-0 py-2">{item}</p>
+                        </div>
+                    ) : null
                 ))
             )}
+
 
         </div>
     );
