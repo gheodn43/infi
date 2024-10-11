@@ -53,7 +53,7 @@
   "introduce-team": [
     {
       "name": "Nguyen Viet Anh Tuan",
-      "role": "Leader of Project",
+      "role": "Head of Project",
       "images": "/images/anhtuan.jpg"
     },
     {
@@ -146,5 +146,11 @@
     "lackOfFrontErr": "At least one field on the front of the card must have a value.",
     "lackOfBackErr": "At least one field on the back of the card must have a value.",
     "addSuccess": "Card added successfully."
+  },
+  "cardContent": {
+    "congratulations": "Congratulations! You have finished this deck for now.",
+    "exitBtn": "Exit",
+    "exitMessageDefault": "Are you sure you want to leave this page?",
+    "exitMessage": "Unfinished cards, you will complete them later?"
   }
 }

@@ -70,7 +70,7 @@ export default function RenderFOC({ faceData, face }) {
                         >
                             <p className="mb-0 py-2">{values[index]}</p>
                         </div>
-                    ) : null 
+                    ) : null
                 ))
             ) : (
                 values.map((item, index) => (

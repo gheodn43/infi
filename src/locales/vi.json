@@ -147,5 +147,11 @@
     "lackOfFrontErr": "Ít nhất một trường ở mặt trước của thẻ phải có giá trị.",
     "lackOfBackErr": "Ít nhất một trường ở mặt sau của thẻ phải có giá trị.",
     "addSuccess": "Đã thêm một thẻ thành công."
+  },
+  "cardContent": {
+    "congratulations": "Chúc mừng! Bây giờ bạn đã hoàn thành deck này.",
+    "exitBtn": "Thoát",
+    "exitMessageDefault": "Bạn có chắc chắn muốn rời khỏi trang này?",
+    "exitMessage": "Thẻ chưa hoàn thành, sẽ hoàn thành sau?"
   }
 }

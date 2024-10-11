@@ -121,7 +121,7 @@ export default function RenderCard({ card, onNextCard }) {
     }
     return (
         <div>
-            <p>Time: {time.toFixed(2)} seconds</p>
+            <p className="text-secondary">{time.toFixed(2)}</p>
             <div className="h-70" onClick={handleToggleFace}>
                 {window.innerWidth >= 768 ? (
                     <div>

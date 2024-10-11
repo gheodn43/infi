@@ -113,11 +113,7 @@ const getCardOfDeck = async (deck_id) => {
         };
         return statusPriority[a.status] - statusPriority[b.status];
     });
-    const result = sortedCards.map(card => ({
-        card,
-        timeToShow: Date.now() + 0
-    }));
-    return result;
+    return sortedCards;
 };
 
 const updateCardById = async (card_id, updatedCard) => {
