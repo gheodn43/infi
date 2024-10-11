@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getCardOfDeck, updateCardById } from "../../localDB/db";
 import Card from "../../model/card";
 import RenderCard from "../RenderCard";
-import { getHeap, selectCardTime, displayNextCard } from "../car.heap";
+import { clearHeap, getHeap, selectCardTime, displayNextCard } from "../car.heap";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
@@ -47,6 +47,7 @@ export default function CardContent() {
             }
         };
         if (deck && deck.deck_id) {
+            clearHeap();
             fetchCards();
         }
     }, [deck]);
@@ -88,8 +89,9 @@ export default function CardContent() {
             if (window.confirm(confirmationMessage)) {
                 updateCardById(currentCard.card_id, currentCard);
                 const waitingCards = getHeap();
+                console.log(waitingCards)
                 if (waitingCards.length > 0) {
-                    waitingCards.map(card => updateCardById(card.card_id, card));
+                    waitingCards.map(item => updateCardById(item.card.card_id, item.card));
                 }
                 const newUrl = location.pathname.replace('/study', '');
                 navigate(newUrl);

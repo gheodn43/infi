@@ -79,6 +79,9 @@ class MinHeap {
     getHeap() {
         return this.heap;
     }
+    clear() {
+        this.heap = [];
+    }
 }
 
 const minHeap = new MinHeap();
@@ -103,4 +106,8 @@ const getHeap = () => {
     return minHeap.getHeap();
 };
 
-export { selectCardTime, displayNextCard, getHeap };
+const clearHeap = () =>{
+    minHeap.clear()
+}
+
+export { selectCardTime, displayNextCard, getHeap, clearHeap };
