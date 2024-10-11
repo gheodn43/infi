@@ -16,7 +16,13 @@ class MinHeap {
             let parentIndex = Math.floor((index - 1) / 2);
             let parent = this.heap[parentIndex];
 
-            if (element.timeToShow >= parent.timeToShow) break;
+            // if (element.timeToShow >= parent.timeToShow) break;
+            if (parentIndex === 0) {
+                break;
+            }
+            if (element.timeToShow >= parent.timeToShow || index <= 2) {
+                break;
+            }
 
             this.heap[index] = parent;
             index = parentIndex;

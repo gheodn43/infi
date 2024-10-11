@@ -11,11 +11,14 @@ export default function CardContent() {
     const { t } = useTranslation();
     const { deck } = useDeck();
     const [currentCard, setCurrentCard] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [counter, setCounter] = useState(0);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         const fetchCards = async () => {
+            setLoading(true);
             const cardList = await getCardOfDeck(deck.deck_id);
             if (cardList && cardList.length > 0) {
                 cardList.forEach(card => {
@@ -45,15 +48,17 @@ export default function CardContent() {
             } else if (status === 'empty') {
                 setCurrentCard(null);
             }
+            setLoading(false);
         };
+    
         if (deck && deck.deck_id) {
             clearHeap();
             fetchCards();
         }
     }, [deck]);
+    
 
     useEffect(() => {
-        console.log('called')
         if(currentCard){
             const handleBeforeUnload = (event) => {
                 const confirmationMessage = t('cardContent.exitMessageDefault');
@@ -77,6 +82,7 @@ export default function CardContent() {
         const { status, card } = displayNextCard();
         if (status === 'success') {
             setCurrentCard(card);
+            setCounter(prev => prev + 1);
         } else if (status === 'empty') {
             setCurrentCard(null);
         }
@@ -89,7 +95,6 @@ export default function CardContent() {
             if (window.confirm(confirmationMessage)) {
                 updateCardById(currentCard.card_id, currentCard);
                 const waitingCards = getHeap();
-                console.log(waitingCards)
                 if (waitingCards.length > 0) {
                     waitingCards.map(item => updateCardById(item.card.card_id, item.card));
                 }
@@ -109,8 +114,13 @@ export default function CardContent() {
                     {t('cardContent.exitBtn')}
                 </div>
             </div>
-            {currentCard ? (
-                <RenderCard card={currentCard} onNextCard={handleNextCard} />
+    
+            {loading ? (
+                <div className="container py-5 px-5">
+                    {/* <h3 className="text-center">{t('cardContent.loading')}</h3> */}
+                </div>
+            ) : currentCard ? (
+                <RenderCard key={counter} card={currentCard} onNextCard={handleNextCard} />
             ) : (
                 <div className="container py-5 px-5">
                     <h3 className="text-center">{t('cardContent.congratulations')}</h3>
@@ -118,4 +128,5 @@ export default function CardContent() {
             )}
         </div>
     );
+    
 }
