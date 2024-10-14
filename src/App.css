@@ -35,7 +35,7 @@ html body {
 }
 
 .h-max-100 {
-  max-height: 100vh;
+  max-height: 200vh;
 }
 
 .logo {
@@ -218,6 +218,15 @@ html body {
   transform: rotate(180deg);
   transition: transform 0.3s ease;
 }
+.LanguageSwitcher{
+  width: 6rem;
+  color: gray;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.LanguageSwitcher:hover{
+  color: white;
+  background-color: #262C36;
+}
 .underline-none{
   text-decoration: none;
 }
@@ -225,11 +234,11 @@ html body {
   text-decoration: none;
   padding: 0.5rem 1rem;
   color: gray;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .link-underline:hover {
-  background-color: #262C36;
+  color: white;
 }
 
 .button-cus-1 {

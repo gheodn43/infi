@@ -1,7 +1,7 @@
 import { useDeck } from "../../providers/PetContext";
 import { useEffect, useState } from "react";
 import { getCardOfDeck, updateCardById } from "../../localDB/db";
-import {Card} from "../../model/card";
+import { Card } from "../../model/card";
 import RenderCard from "../RenderCard";
 import { clearHeap, getHeap, selectCardTime, displayNextCard } from "../car.heap";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -50,30 +50,30 @@ export default function CardContent() {
             }
             setLoading(false);
         };
-    
+
         if (deck && deck.deck_id) {
             clearHeap();
             fetchCards();
         }
     }, [deck]);
-    
+
 
     useEffect(() => {
-        if(currentCard){
+        if (currentCard) {
             const handleBeforeUnload = (event) => {
                 const confirmationMessage = t('cardContent.exitMessageDefault');
                 event.returnValue = confirmationMessage;
                 return confirmationMessage;
             };
-    
+
             window.addEventListener('beforeunload', handleBeforeUnload);
-    
+
             return () => {
                 window.removeEventListener('beforeunload', handleBeforeUnload);
             };
         }
         return;
-    }, [currentCard,t]);
+    }, [currentCard, t]);
 
     const handleNextCard = async (isSavedToHeap, al_card, selected_v) => {
         if (isSavedToHeap) {
@@ -108,15 +108,15 @@ export default function CardContent() {
     };
 
     return (
-        <div className="my-3">
+        <div className="d-flex align-items-center justify-content-center h-100">
             <div className='p-2 d-flex justify-content-end fixed-top'>
                 <div className='px-2 py-1 infi-bg-gray infi-border rounded-2 cursor-pointer' onClick={handleExit}>
                     {t('cardContent.exitBtn')}
                 </div>
             </div>
-    
+
             {loading ? (
-                <div className="container py-5 px-5">
+                <div className="container px-5">
                     {/* <h3 className="text-center">{t('cardContent.loading')}</h3> */}
                 </div>
             ) : currentCard ? (
@@ -128,5 +128,5 @@ export default function CardContent() {
             )}
         </div>
     );
-    
+
 }

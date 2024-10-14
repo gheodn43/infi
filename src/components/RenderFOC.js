@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useDeck } from "../providers/PetContext";
 
 export default function RenderFOC({ faceData, face }) {
@@ -56,7 +58,7 @@ export default function RenderFOC({ faceData, face }) {
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="d-flex container infi-bg-dark infi-border text-responsive py-1 rounded-1" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%' }}>
+        <div className="container py-1 infi-bg-dark infi-border text-responsive rounded-1 overflow-auto" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%'}}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
                     values[index] ? (
@@ -68,7 +70,10 @@ export default function RenderFOC({ faceData, face }) {
                                 width: window.innerWidth <= 768 ? '100%' : block.width,
                             }}
                         >
-                            <p className="mb-0 py-2">{values[index]} and {index}</p>
+                            {/* <pre className="mb-0 py-2">{values[index]}</pre> */}
+                            <SyntaxHighlighter className="my-0 rounded-1 h-100 w-100" language="javascript" style={vscDarkPlus}>
+                                {values[index]}
+                            </SyntaxHighlighter>
                         </div>
                     ) : null
                 ))
@@ -80,7 +85,7 @@ export default function RenderFOC({ faceData, face }) {
                             style={{ width: '100%', textAlign: 'center' }}
                             key={index}
                         >
-                            <p className="mb-0 py-2">{item}</p>
+                            <pre className="mb-0 py-2">{item}</pre>
                         </div>
                     ) : null
                 ))
