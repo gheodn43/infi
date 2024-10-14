@@ -349,9 +349,8 @@ export default function AddCardPopup({ deck, onClose }) {
                                                         ? ' [B]'
                                                         : ''}
                                         </label>
-                                        <input
+                                        <textarea
                                             id={usingProperty.property_name}
-                                            type="text"
                                             value={usingProperty.property_value}
                                             placeholder={`${t('addCard.contentPlacehoder')} ${usingProperty.property_name}`}
                                             className="rounded-3 input-cus w-100"

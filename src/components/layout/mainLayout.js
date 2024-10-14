@@ -49,16 +49,16 @@ const mainLayout = (WrappedComponent) => {
                 <header className="fixed-top infi-bg-dark border-b-1" >
                     <div className="container d-flex justify-content-between align-items-center h-custom">
                         <Logo />
-                        <div className="d-flex d-sm-none align-items-center" ref={toggleRef}>
-                            <LanguageSwitcher />
+                        <div className="d-flex d-sm-none align-items-center gap-3" ref={toggleRef}>
+                            <LanguageSwitcher/>
                             <FontAwesomeIcon
                                 icon={faBars}
                                 onClick={toggleMenu}
-                                className="text-white cursor-pointer icon-size mb-0 ml-2"
+                                className="text-white cursor-pointer icon-size mb-0 ml-2 py-2"
                             />
                         </div>
 
-                        <div className="d-none d-sm-flex">
+                        <div className="d-none d-sm-flex align-items-center">
                             <AboutLink />
                             <GuideLink />
                             <LanguageSwitcher />
@@ -67,7 +67,7 @@ const mainLayout = (WrappedComponent) => {
                     {isMenuOpen && (
                         <div
                             className="infi-bg-dark infi-border text-white p-3 position-fixed"
-                            style={{ right: 0, top: '55px', width: '50%', borderRadius: '0 0 0 10px' }}
+                            style={{ right: 0, top: '55px', width: '40%', borderRadius: '0 0 0 10px' }}
                             ref={menuRef}
                         >
                             <div className="d-flex flex-column align-items-start">

@@ -14,10 +14,10 @@ function LanguageSwitcher() {
   };
 
   return (
-    <button onClick={toggleLanguage} className="btn text-white ">
+    <div onClick={toggleLanguage} className="d-flex justify-content-center align-items-center infi-border LanguageSwitcher py-1 rounded-3 cursor-pointer">
       <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-      {currentLanguage === 'en' ? 'Tiếng Việt' : 'English'}
-    </button>
+      {currentLanguage === 'en' ? 'VI' : 'ENG'}
+    </div>
   );
 }
 
