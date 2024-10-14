@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { DeckProvider } from './providers/PetContext';
+import { DeckTrackingProvider } from './providers/DeckTrackingContext';
 import LandingPage from './pages/landingPage';
 import AboutUsPage from './pages/aboutUsPage';
 import GuidePage from './pages/guidePage';
@@ -12,6 +13,7 @@ import CardPage from './pages/cardPage';
 function App() {
   return (
     <DeckProvider>
+      <DeckTrackingProvider>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -26,6 +28,7 @@ function App() {
 
         </Routes>
       </Router>
+      </DeckTrackingProvider>
     </DeckProvider>
   );
 }

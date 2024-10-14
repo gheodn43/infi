@@ -1,3 +1,17 @@
+const Status = {
+    NEW_CARD: 'NEW_CARD',
+    LEARNING_CARD: 'LEARNING_CARD',
+    REVIEW_CARD: 'REVIEW_CARD',
+    COOLING_CARD: 'COOLING_CARD',
+  };
+  
+  const ReviewAction = {
+    AGAIN: 'again',
+    HARD: 'hard',
+    GOOD: 'good',
+    EASY: 'easy',
+  };
+
 class Card {
     constructor(
         card_id,
@@ -8,7 +22,7 @@ class Card {
         delay_value = null,
         step = 0,
         avg_comp_time = [0, 0], // tổng thời gian học thẻ này, số lần đã học
-        status = 'NEW_CARD', //LEARNING_CARD, REVIEW_CARD, COOLING_CARD
+        status = Status.NEW_CARD,
         again = '1m',
         hard = '5m',
         good = '10m',
@@ -64,7 +78,7 @@ class Card {
                 throw new Error('Invalid time unit');
         }
         this.overdue_at = now.toISOString();
-        this.status = 'COOLING_CARD'
+        this.status = Status.COOLING_CARD;
 
     }
     changeST1() {
@@ -74,7 +88,7 @@ class Card {
         this.easy = '3d';
     }
     changeStatusToLearning(){
-        this.status = 'LEARNING_CARD';
+        this.status = Status.LEARNING_CARD;
     }
     update_avg_comp_time(timeInSeconds) {
         const timeToAdd = Math.min(timeInSeconds, 15.00);
@@ -122,7 +136,7 @@ class Card {
                     this.hard = '10m';
                     this.good = '1d';
                     this.easy = '3d';
-                    this.status = 'LEARNING_CARD'
+                    this.status = Status.LEARNING_CARD
                     this.step -= 1;
                     break;
                 }
@@ -196,4 +210,4 @@ class Card {
 
 }
 
-export default Card;
+export { Card, Status, ReviewAction };

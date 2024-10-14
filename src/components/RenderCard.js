@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { updateCardById } from "../localDB/db";
+import { Status } from "../model/card";
+import { updateCardById, updateDeckAfterLearning } from "../localDB/db";
 import RenderFOC from "./RenderFOC";
 import CardLevelBtn from "./buttons/CardLevelBtns";
 import CardShowAnswerBtn from "./buttons/CardShowAnswerBtn";
@@ -79,11 +80,15 @@ export default function RenderCard({ card, onNextCard }) {
         switch (currentCard.step) {
             case 0:
                 if (level === 'again' || level === 'hard' || level === 'good') {
-                    if (currentCard.status !== 'LEARNING_CARD')
+                    if (currentCard.status !== 'LEARNING_CARD'){
                         currentCard.changeStatusToLearning();
+                        updateDeckAfterLearning(currentCard.deck_id, Status.NEW_CARD, Status.LEARNING_CARD, 1);
+                    }
                     const isSavedToHeap = true;
                     onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
                 } else {
+                    if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
+                    else updateDeckAfterLearning(currentCard.deck_id, Status.NEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
@@ -92,11 +97,15 @@ export default function RenderCard({ card, onNextCard }) {
                 break;
             case 1:
                 if (level === 'again' || level === 'hard') {
-                    if (currentCard.status !== 'LEARNING_CARD')
+                    if (currentCard.status !== 'LEARNING_CARD'){
+                        updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.LEARNING_CARD, 1);
                         currentCard.changeStatusToLearning();
+                    }
                     const isSavedToHeap = true;
                     onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
                 } else {
+                    if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
+                    else updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
@@ -106,9 +115,14 @@ export default function RenderCard({ card, onNextCard }) {
             case 2:
                 if (level === 'again') {
                     currentCard.a(level);
+                    if (currentCard.status !== 'LEARNING_CARD'){
+                        updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.LEARNING_CARD, 1);
+                    }
                     const isSavedToHeap = true;
                     onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
                 } else {
+                    if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
+                    else updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
