@@ -5,7 +5,7 @@ class Deck {
         this.parent_deck_path = parent_deck_path || '';
         this.deck_status = 'ACTIVE';
         this.deck_path = this.createDeckPath();
-        this.deck_type = deck_type;
+        this.deck_type = deck_type; //SHARE_WITH_ME or PRIVATE
         this.new_count = 0;
         this.learning_count = 0;
         this.overdue_count = 0;

@@ -23,6 +23,7 @@ function App() {
           <Route path="/deck" element={<DeckPage />} />
           <Route path="/deck/my-decks" element={<MyDeckPage />} />
           <Route path="/deck/share-with-me" element={<ShareWithMePage />} />
+          <Route path="/deck/study" element={<CardPage />} />
           <Route path="/deck/my-decks/study" element={<CardPage />} />
           <Route path="/deck/share-with-me/study" element={<CardPage />} />
 

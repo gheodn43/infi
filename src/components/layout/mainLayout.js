@@ -46,7 +46,7 @@ const mainLayout = (WrappedComponent) => {
 
         return (
             <div className="d-flex flex-column">
-                <header className="bg-dark fixed-top">
+                <header className="fixed-top infi-bg-dark border-b-1" >
                     <div className="container d-flex justify-content-between align-items-center h-custom">
                         <Logo />
                         <div className="d-flex d-sm-none align-items-center" ref={toggleRef}>
@@ -66,8 +66,8 @@ const mainLayout = (WrappedComponent) => {
                     </div>
                     {isMenuOpen && (
                         <div
-                            className="bg-dark text-white p-3 position-fixed"
-                            style={{ right: 0, top: '56px', width: '50%' }}
+                            className="infi-bg-dark infi-border text-white p-3 position-fixed"
+                            style={{ right: 0, top: '55px', width: '50%', borderRadius: '0 0 0 10px' }}
                             ref={menuRef}
                         >
                             <div className="d-flex flex-column align-items-start">

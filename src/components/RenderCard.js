@@ -67,7 +67,7 @@ export default function RenderCard({ card, onNextCard }) {
     };
 
     if (!currentCard) {
-        return <p>Loading card...</p>;
+        return;
     }
 
     const frontFace = <div><RenderFOC faceData={currentCard.front} face='front' /></div>;
@@ -134,15 +134,14 @@ export default function RenderCard({ card, onNextCard }) {
         }
     }
     return (
-        <div>
-            <p className="text-secondary">{time.toFixed(2)}</p>
+        <div className="mt-5">
             <div className="h-70" onClick={handleToggleFace}>
                 {window.innerWidth >= 768 ? (
                     <div>
                         {frontFace}
                         {isAnswerShown && (
                             <>
-                                <hr className="border-t-4 border-white my-4" />
+                                <div className="py-4" />
                                 {backFace}
                             </>
                         )}

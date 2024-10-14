@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const GuideLink = () => {
     const { t } = useTranslation();
     return (
-        <Link to="/guide" className="btn text-white mb-0 link-underline">
+        <Link to="/guide" className="text-white m-1 link-underline rounded-1">
             {t('guide.title')}
         </Link>
     );

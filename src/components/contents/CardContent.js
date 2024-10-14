@@ -110,7 +110,7 @@ export default function CardContent() {
     return (
         <div className="my-3">
             <div className='p-2 d-flex justify-content-end fixed-top'>
-                <div className='px-2 py-1 bg-secondary rounded-2 cursor-pointer' onClick={handleExit}>
+                <div className='px-2 py-1 infi-bg-gray infi-border rounded-2 cursor-pointer' onClick={handleExit}>
                     {t('cardContent.exitBtn')}
                 </div>
             </div>

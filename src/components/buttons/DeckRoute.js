@@ -10,7 +10,7 @@ export default function DeckRoute() {
     const showShareWithMeLink = location.pathname.includes('share-with-me');
 
     return (
-        <div className="px-lg-3 d-wrapper gap-3 bg-primary-cus rounded-1">
+        <div className="px-lg-3 d-wrapper gap-3 py-2 infi-bg-dark infi-border rounded-1">
             <HomeLink />
             <span>/</span>
             <DeckLink />

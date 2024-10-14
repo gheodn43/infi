@@ -37,7 +37,7 @@ export default function RenderFOC({ faceData, face }) {
     }, [faceLayout, FDT, face]);
 
     if (!isFaceLayoutReady || !faceLayout.alignment) {
-        return <p>Loading layout...</p>;
+        return;
     }
 
     let alignItem;
@@ -56,19 +56,19 @@ export default function RenderFOC({ faceData, face }) {
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="d-flex container text-responsive py-1 rounded-2" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%', background: '#282828' }}>
+        <div className="d-flex container infi-bg-dark infi-border text-responsive py-1 rounded-1" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%' }}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
                     values[index] ? (
                         <div
-                            className="my-1 bg-black rounded-2"
+                            className="my-1 infi-bg-dark infi-border rounded-1"
                             key={index}
                             style={{
                                 textAlign: alignItem,
                                 width: window.innerWidth <= 768 ? '100%' : block.width,
                             }}
                         >
-                            <p className="mb-0 py-2">{values[index]}</p>
+                            <p className="mb-0 py-2">{values[index]} and {index}</p>
                         </div>
                     ) : null
                 ))
@@ -76,7 +76,7 @@ export default function RenderFOC({ faceData, face }) {
                 values.map((item, index) => (
                     item ? (
                         <div
-                            className="my-1 bg-black rounded-2"
+                            className="my-1 infi-bg-dark infi-border rounded-1"
                             style={{ width: '100%', textAlign: 'center' }}
                             key={index}
                         >
