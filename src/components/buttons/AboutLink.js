@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const AboutLink = () => {
     const { t } = useTranslation();
     return (
-        <Link to="/about" className="btn text-white mb-0 link-underline">
+        <Link to="/about" className="text-white m-1 link-underline rounded-1">
             {t('about.title')}
         </Link>
     );

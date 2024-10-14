@@ -13,7 +13,15 @@ html body {
   background-color: black;
   color: white;
 }
-
+.infi-bg-dark{
+  background-color: #0A0A0A;
+}
+.infi-bg-gray{
+  background-color: #151B23;
+}
+.infi-border{
+  border: solid 1px #3D444D;
+}
 .h-full {
   height: 100vh;
 }
@@ -87,6 +95,7 @@ html body {
 .h-md-75 {
   height: 100%;
 }
+.h-sm-75{ height: 100%;}
 
 .w-md-25 {
   width: 100%;
@@ -102,7 +111,7 @@ html body {
 .input-layout {
   min-height: 5rem;
   background-color: rgba(255, 255, 255, 0);
-  border: solid 1px white;
+  border: solid 1px #3D444D;
   color: #d9d9d9;
 }
 
@@ -138,7 +147,7 @@ html body {
 .button-gradient:hover {
   background: linear-gradient(45deg, gray, black, gray);
 }
-
+.text-reponsive{font-size: medium;}
 @media (min-width: 576px) { /* sm */
   .h-custom { height: 60px;}
   .icon-size{ height: 36px;}
@@ -147,10 +156,11 @@ html body {
   .footer-img{ width: 80%;}
   .img-not-found{ width: 70%;}
   .w-md-75{ width: 100%;}
+  .h-sm-75{ height: 75%;}
   .w-lg-50{ width: 100%;}
   .h-md-75{ height: 100%;}
   .w-md-25{width: 100%;}
-  .text-reponsive{font-size: small;}
+  .text-reponsive{font-size: medium;}
 }
 
 
@@ -165,6 +175,7 @@ html body {
   .w-md-75{ width: 70%;}
   .w-lg-50{ width: 100%;}
   .h-md-75{ height: 75%;}
+  .h-sm-75{ height: 75%;}
   .w-md-25{width: 25%;}
   .text-reponsive{font-size: medium;}
 }
@@ -181,6 +192,7 @@ html body {
   .w-md-75{ width: 70%; }
   .w-lg-50{ width: 50%; }
   .h-md-75{ height: 75%; }
+  .h-sm-75{ height: 75%;}
   .w-md-25{width: 25%;}
   .text-reponsive{font-size: medium;}
 }
@@ -197,6 +209,7 @@ html body {
   .w-md-75{ width: 70%; }
   .w-lg-50{ width: 50%; }
   .h-md-75{ height: 75%; }
+  .h-sm-75{ height: 75%;}
   .w-md-25{width: 25%;}
   .text-reponsive{font-size: large;}
 }
@@ -205,16 +218,18 @@ html body {
   transform: rotate(180deg);
   transition: transform 0.3s ease;
 }
-
+.underline-none{
+  text-decoration: none;
+}
 .link-underline {
   text-decoration: none;
+  padding: 0.5rem 1rem;
   color: gray;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .link-underline:hover {
-  border-color: gray;
+  background-color: #262C36;
 }
 
 .button-cus-1 {
@@ -299,10 +314,12 @@ footer {
   margin-right: 0.8rem;
 }
 
-.border-b-2 {
-  border-bottom: #d9d9d9 solid 2px;
+.border-b-1 {
+  border-bottom: #3D444D solid 1px;
 }
-
+.border-b-2 {
+  border-bottom: #3D444D solid 2px;
+}
 .message-error {
   animation: shake 0.5s ease forwards;
   /* Thêm hiệu ứng rung trong 0.5 giây */

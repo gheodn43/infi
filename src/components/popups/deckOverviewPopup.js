@@ -36,7 +36,7 @@ export default function DeckOverviewPopup({ onClose, deck_id }) {
 
     return (
         <div
-            className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-75 z-1"
+            className="popup-overlay d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-25 z-1"
             onClick={handleOutsideClick}
         >
             <div className="modal-content container bg-dark text-light px-4 py-3 rounded w-md-50">
