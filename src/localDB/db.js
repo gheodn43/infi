@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 import Deck from '../model/deck';
-import Card from '../model/card';
+import {Card, Status} from '../model/card';
 import { v4 as uuidv4 } from 'uuid';
 
 const db = new Dexie('DeckDatabase');
@@ -62,7 +62,66 @@ const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlock
         deck_last_update: new Date().toISOString()
     });
 };
+const updateDeckAfterLearning = async (deckId, from, to, count) => {
+    const deck = await db.decks.get(deckId);
+    if (!deck) {
+        throw new Error(`Deck with ID "${deckId}" not found.`);
+    }
+    switch (from) {
+        case Status.NEW_CARD:
+            if (to === Status.LEARNING_CARD){
+                await db.decks.update(deckId, {
+                    new_count: deck.new_count -= count,
+                    learning_count: deck.learning_count += count,
+                    deck_last_update: new Date().toISOString()
+                });
+            }else if (to === Status.COOLING_CARD) {
+                await db.decks.update(deckId, {
+                    new_count: deck.new_count -= count,
+                    cooling_count: deck.cooling_count += count,
+                    deck_last_update: new Date().toISOString()
+                });
+            }
+            break;
+        case Status.LEARNING_CARD:
+            await db.decks.update(deckId, {
+                learning_count: deck.learning_count -= count,
+                cooling_count: deck.cooling_count += count,
+                deck_last_update: new Date().toISOString()
+            });
+            break;
+        case Status.REVIEW_CARD:
+            if (to === Status.LEARNING_CARD){
+                await db.decks.update(deckId, {
+                    overdue_count: deck.overdue_count -= count,
+                    learning_count: deck.learning_count += count,
+                    deck_last_update: new Date().toISOString()
+                });
+            }
+            else if (to === Status.COOLING_CARD) {
+                await db.decks.update(deckId, {
+                    overdue_count: deck.overdue_count -= count,
+                    cooling_count: deck.cooling_count += count,
+                    deck_last_update: new Date().toISOString()
+                });
+            }
+            break;
+        default:
+            break;
+    }
+}
 
+const updateDeckWhenOverdue = async (deckId, count) => {
+    const deck = await db.decks.get(deckId);
+    if (!deck) {
+        throw new Error(`Deck with ID "${deckId}" not found.`);
+    }
+    await db.decks.update(deckId, {
+        cooling_count: deck.cooling_count -= count,
+        overdue_count: deck.overdue_count += count,
+        deck_last_update: new Date().toISOString()
+    });
+};
 
 const addCard = async (deck_id, usingProperties, t) => {
     const frontProperties = [];
@@ -104,7 +163,7 @@ const addCard = async (deck_id, usingProperties, t) => {
 //NEW_CARD LEARNING_CARD, REVIEW_CARD, COOLING_CARD
 const getCardOfDeck = async (deck_id) => {
     const cards = await db.cards.where('deck_id').equals(deck_id).toArray();
-    const filteredCards = cards.filter(card => card.status !== 'COOLING_CARD');
+    const filteredCards = cards.filter(card => card.status !== Status.COOLING_CARD);
     const sortedCards = filteredCards.sort((a, b) => {
         const statusPriority = {
             'LEARNING_CARD': 1,
@@ -127,6 +186,32 @@ const updateCardById = async (card_id, updatedCard) => {
     return { status: 200, message: 'Card updated successfully' };
 };
 
+const checkOverdueCard = async() => {
+    try {
+        const now = new Date().toISOString();
+        const overdueCards = await db.cards
+            .where('status')
+            .equals(Status.COOLING_CARD)
+            .and(card => card.overdue_at && card.overdue_at <= now)
+            .toArray();
+        if(overdueCards.length > 0){
+            const overdueCountMap = new Map();
+            for (const card of overdueCards) {
+                await db.cards.update(card.card_id, { status: Status.REVIEW_CARD });
+                
+                const currentCount = overdueCountMap.get(card.deck_id) || 0;
+                overdueCountMap.set(card.deck_id, currentCount + 1);
+            }
+            
+            for (const [deckId, count] of overdueCountMap) {
+                await updateDeckWhenOverdue(deckId, count);
+            }
+            console.log(`${overdueCards.length} card(s) updated to REVIEW_CARD status`);
+        }
+    } catch (error) {
+        console.error('Error checking overdue cards:', error);
+    }
+}
 
 
 
@@ -146,4 +231,4 @@ const getDeckWithType = async (deck_type) => {
     return await db.decks.where('deck_type').equals(deck_type).toArray();
 };
 
-export { db, addDeck, updateDeckAfterAddCard, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard, getCardOfDeck, updateCardById};
+export { db, addDeck, updateDeckAfterAddCard, updateDeckAfterLearning, getDeck, deleteDeck, getAllDecks, getDeckWithType, addCard, getCardOfDeck, updateCardById, checkOverdueCard};

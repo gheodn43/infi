@@ -1,7 +1,7 @@
 import { useDeck } from "../../providers/PetContext";
 import { useEffect, useState } from "react";
 import { getCardOfDeck, updateCardById } from "../../localDB/db";
-import Card from "../../model/card";
+import {Card} from "../../model/card";
 import RenderCard from "../RenderCard";
 import { clearHeap, getHeap, selectCardTime, displayNextCard } from "../car.heap";
 import { useNavigate, useLocation } from 'react-router-dom';
