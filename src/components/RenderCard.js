@@ -12,7 +12,7 @@ export default function RenderCard({ card, onNextCard }) {
     const [isAnswerShown, setIsAnswerShown] = useState(false);
     const [isFrontVisible, setIsFrontVisible] = useState(true); 
     const timerRef = useRef(null); 
-    const backFaceRef = useRef(null); 
+    const cardContainerLgRef = useRef(null);
 
     useEffect(() => {
         if (card) {
@@ -51,13 +51,13 @@ export default function RenderCard({ card, onNextCard }) {
         setShowAnswerBtn(false);
         setIsAnswerShown(true);
 
-        if (window.innerWidth >= 768) {
-            if (backFaceRef.current) {
-                backFaceRef.current.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+            if (window.innerWidth >= 768 && cardContainerLgRef.current) {
+                cardContainerLgRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+            } else {
+                setIsFrontVisible(false);
             }
-        } else {
-            setIsFrontVisible(false);
-        }
+        }, 100);
     };
 
     const handleToggleFace = () => {
@@ -67,11 +67,11 @@ export default function RenderCard({ card, onNextCard }) {
     };
 
     if (!currentCard) {
-        return;
+        return null; // Return null instead of nothing
     }
 
     const frontFace = <div><RenderFOC faceData={currentCard.front} face='front' /></div>;
-    const backFace = <div ref={backFaceRef}><RenderFOC faceData={currentCard.back} face='back' /></div>;
+    const backFace = <div><RenderFOC faceData={currentCard.back} face='back' /></div>;
 
     const handLevelClick = (level, value) => {
         const timeToComp = time.toFixed(2);
@@ -85,14 +85,14 @@ export default function RenderCard({ card, onNextCard }) {
                         updateDeckAfterLearning(currentCard.deck_id, Status.NEW_CARD, Status.LEARNING_CARD, 1);
                     }
                     const isSavedToHeap = true;
-                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)));
                 } else {
                     if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
                     else updateDeckAfterLearning(currentCard.deck_id, Status.NEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
-                    onNextCard(isSavedToHeap)
+                    onNextCard(isSavedToHeap);
                 }
                 break;
             case 1:
@@ -102,14 +102,14 @@ export default function RenderCard({ card, onNextCard }) {
                         currentCard.changeStatusToLearning();
                     }
                     const isSavedToHeap = true;
-                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)));
                 } else {
                     if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
                     else updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
-                    onNextCard(isSavedToHeap)
+                    onNextCard(isSavedToHeap);
                 }
                 break;
             case 2:
@@ -119,23 +119,24 @@ export default function RenderCard({ card, onNextCard }) {
                         updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.LEARNING_CARD, 1);
                     }
                     const isSavedToHeap = true;
-                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)))
+                    onNextCard(isSavedToHeap, currentCard, parseInt(value.slice(0, -1)));
                 } else {
                     if (currentCard.status === Status.LEARNING_CARD) updateDeckAfterLearning(currentCard.deck_id, Status.LEARNING_CARD, Status.COOLING_CARD, 1);
                     else updateDeckAfterLearning(currentCard.deck_id, Status.REVIEW_CARD, Status.COOLING_CARD, 1);
                     currentCard.a(level);
                     updateCardById(currentCard.card_id, currentCard);
                     const isSavedToHeap = false;
-                    onNextCard(isSavedToHeap)
+                    onNextCard(isSavedToHeap);
                 }
                 break;
             default:
                 break;
         }
     }
+
     return (
         <div className="h-100 container" onClick={handleToggleFace}>
-            <div>
+            <div ref={cardContainerLgRef}>
                 {window.innerWidth >= 768 ? (
                     <div>
                         {frontFace}
