@@ -134,8 +134,8 @@ export default function RenderCard({ card, onNextCard }) {
         }
     }
     return (
-        <div className="h-100 container">
-            <div onClick={handleToggleFace}>
+        <div className="h-100 container" onClick={handleToggleFace}>
+            <div>
                 {window.innerWidth >= 768 ? (
                     <div>
                         {frontFace}

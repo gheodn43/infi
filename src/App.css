@@ -322,7 +322,9 @@ footer {
 .mr-2 {
   margin-right: 0.8rem;
 }
-
+.border-t-1 {
+  border-top: #3D444D solid 1px;
+}
 .border-b-1 {
   border-bottom: #3D444D solid 1px;
 }

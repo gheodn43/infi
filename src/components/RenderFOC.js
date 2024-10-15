@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useDeck } from "../providers/PetContext";
@@ -18,25 +18,36 @@ export default function RenderFOC({ faceData, face }) {
             setFaceLayout(deck?.deck_back_layout || {});
         }
     }, [faceData, face, deck]);
+
     useEffect(() => {
         if (faceLayout) {
-            const getValuesFromLayout = (layout, cardData) => {
+            const getValuesFromLayout = (layout, cardData, properties) => {
                 if (layout.blocks.length === 0) {
-                    return cardData.map(item => item.value)
+                    return cardData.map(item => {
+                        const matchingProperty = properties.find(prop => prop.property_name === item.property);
+                        return {
+                            value: item.value,
+                            type: matchingProperty ? matchingProperty.property_type : 'normal',
+                            language: matchingProperty ? matchingProperty.language : null
+                        };
+                    });
                 } else {
                     return layout.blocks.map(block => {
-                        const cardProperty = cardData.find(item =>
-                            item.property === block.property
-                        );
-                        return cardProperty ? cardProperty.value : null;
+                        const cardProperty = cardData.find(item => item.property === block.property);
+                        const matchingProperty = properties.find(prop => prop.property_name === block.property);
+                        return cardProperty ? {
+                            value: cardProperty.value,
+                            type: matchingProperty ? matchingProperty.property_type : 'normal',
+                            language: matchingProperty ? matchingProperty.language : null
+                        } : null;
                     });
                 }
             }
-            const values = getValuesFromLayout(faceLayout, FDT);
+            const values = getValuesFromLayout(faceLayout, FDT, deck.deck_properties || []);
             setValues(values);
             setIsFaceLayoutReady(true);
         }
-    }, [faceLayout, FDT, face]);
+    }, [faceLayout, FDT, face, deck.properties]);
 
     if (!isFaceLayoutReady || !faceLayout.alignment) {
         return;
@@ -58,42 +69,53 @@ export default function RenderFOC({ faceData, face }) {
     const blocks = faceLayout.blocks || [];
 
     return (
-        <div className="container py-1 infi-bg-dark infi-border text-responsive rounded-1 overflow-auto" style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%'}}>
+        <div className="container py-1 infi-bg-dark infi-border text-responsive rounded-1 overflow-auto"
+            style={{ flexDirection: flexDirection, alignItems: alignItem, flexWrap: 'wrap', gap: '0.5%' }}>
             {blocks.length > 0 ? (
                 blocks.map((block, index) => (
-                    values[index] ? (
-                        <div
-                            className="my-1 infi-bg-dark infi-border rounded-1"
-                            key={index}
-                            style={{
-                                textAlign: alignItem,
-                                width: window.innerWidth <= 768 ? '100%' : block.width,
-                            }}
-                        >
-                            {/* <pre className="mb-0 py-2">{values[index]}</pre> */}
-                            <SyntaxHighlighter className="my-0 rounded-1 h-100 w-100" language="javascript" style={vscDarkPlus}>
-                                {values[index]}
-                            </SyntaxHighlighter>
-                        </div>
+                    values[index] && values[index].value ? (
+                        <React.Fragment key={index}>
+                            {values[index].type === 'code' ? (
+                                <div className="my-1 infi-bg-dark infi-border rounded-1" key={index} style={{ textAlign: 'start', width: window.innerWidth <= 768 ? '100%' : block.width }}>
+                                    <SyntaxHighlighter
+                                        className="my-0 rounded-1 h-100 w-100 text-sm"
+                                        language={values[index].language || 'javascript'}
+                                        style={vscDarkPlus}
+                                    >
+                                        {values[index].value}
+                                    </SyntaxHighlighter>
+                                </div>
+                            ) : (
+                                <div className="my-1 infi-bg-dark infi-border rounded-1" key={index} style={{ textAlign: alignItem, width: window.innerWidth <= 768 ? '100%' : block.width }}>
+                                    <pre className="mb-0 py-2 px-3">{values[index].value}</pre>
+                                </div>
+                            )}
+                        </React.Fragment>
                     ) : null
                 ))
             ) : (
                 values.map((item, index) => (
-                    item ? (
+                    item && item.value ? (
                         <div
                             className="my-1 infi-bg-dark infi-border rounded-1"
                             style={{ width: '100%', textAlign: 'center' }}
                             key={index}
                         >
-                            <pre className="mb-0 py-2">{item}</pre>
+                            {item.type === 'code' ? (
+                                <SyntaxHighlighter
+                                    className="my-0 rounded-1 h-100 w-100 text-sm"
+                                    language={item.language || 'javascript'}
+                                    style={vscDarkPlus}
+                                >
+                                    {item.value}
+                                </SyntaxHighlighter>
+                            ) : (
+                                <pre className="mb-0 py-2 px-3">{item.value}</pre>
+                            )}
                         </div>
                     ) : null
                 ))
             )}
-
-
         </div>
     );
 }
-
-

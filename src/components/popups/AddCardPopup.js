@@ -239,13 +239,13 @@ export default function AddCardPopup({ deck, onClose }) {
         let updatedBlocks;
         let updatedUsingProperties = [...state.usingProperties];
         if (state.selectedBlockSize.side === "front") {
-            updatedBlocks = [...state.frontBlocks.blocks, { width: state.selectedBlockSize.size, property: newProperty }];
+            updatedBlocks = [...state.frontBlocks.blocks, { width: state.selectedBlockSize.size, property: newProperty.property_name }];
             dispatch({ type: "UPDATE_FRONT_BLOCKS", payload: { ...state.frontBlocks, blocks: updatedBlocks } });
-            updatedUsingProperties = updateUsingProperties(newProperty, "front", updatedUsingProperties);
+            updatedUsingProperties = updateUsingProperties(newProperty.property_name, "front", updatedUsingProperties);
         } else {
-            updatedBlocks = [...state.backBlocks.blocks, { width: state.selectedBlockSize.size, property: newProperty }];
+            updatedBlocks = [...state.backBlocks.blocks, { width: state.selectedBlockSize.size, property: newProperty.property_name }];
             dispatch({ type: "UPDATE_BACK_BLOCKS", payload: { ...state.backBlocks, blocks: updatedBlocks } });
-            updatedUsingProperties = updateUsingProperties(newProperty, "back", updatedUsingProperties);
+            updatedUsingProperties = updateUsingProperties(newProperty.property_name, "back", updatedUsingProperties);
         }
 
         dispatch({ type: "ADD_PROPERTY", payload: newProperty });
@@ -279,6 +279,7 @@ export default function AddCardPopup({ deck, onClose }) {
         if (state.quantityAdded > 0) {
             await updateDeckAfterAddCard(deck.deck_id, state.properties, state.frontBlocks, state.backBlocks, state.quantityAdded);
             updateDeck({
+                deck_properties: state.properties,
                 deck_front_layout: state.frontBlocks,
                 deck_back_layout: state.backBlocks
             });

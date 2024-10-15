@@ -8,6 +8,7 @@ export const DeckProvider = ({ children }) => {
         deck_id: null,
         deck_name: '',
         deck_type: '',
+        deck_property: [],
         deck_front_layout: null,
         deck_back_layout: null
     });
