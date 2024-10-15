@@ -43,7 +43,7 @@ function reducer(state, action) {
         case "ADD_PROPERTY":
             return {
                 ...state,
-                properties: state.properties.includes(action.payload)
+                properties: state.properties.some(item => item.property_name === action.payload.property_name)
                     ? state.properties
                     : [...state.properties, action.payload],
             };
@@ -129,7 +129,8 @@ const updateUsingProperties = (property_name, used_at, currentUsingProperties) =
             (prop) => prop.property_name === property_name
         )
         if (existingPropertyIndex !== -1) {
-            // nếu tồn tại thì xóa đi thuộc tính mặc định tại defaultPropertyIndex
+            // nếu tồn tại thì xóa đi thuộc tính mặc định tại currentUsingProperties[defaultPropertyIndex]
+            currentUsingProperties.splice(defaultPropertyIndex, 1);
             const currentUsedAt = currentUsingProperties[existingPropertyIndex].used_at;
             if (!currentUsedAt.includes(used_at)) {
                 currentUsingProperties[existingPropertyIndex].used_at += `, ${used_at}`;
