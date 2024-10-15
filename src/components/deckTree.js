@@ -7,10 +7,10 @@ export default function DeckTree({ decks, showImg }) {
     const [showPopup, setShowPopup] = useState(false);
     const { updateDeck } = useDeck();
 
-    const handleDeckClick = (deck_id, deck_name, deck_type, deck_front_layout, deck_back_layout) => {
+    const handleDeckClick = (deck_id, deck_name, deck_type, deck_properties, deck_front_layout, deck_back_layout) => {
         setSelectedDeckId(deck_id);
         setShowPopup(true);
-        updateDeck({ deck_id: deck_id, deck_name: deck_name, deck_type: deck_type, deck_front_layout: deck_front_layout, deck_back_layout: deck_back_layout});
+        updateDeck({ deck_id: deck_id, deck_name: deck_name, deck_type: deck_type, deck_properties: deck_properties, deck_front_layout: deck_front_layout, deck_back_layout: deck_back_layout});
         document.body.style.overflow = 'hidden';
     };
 
@@ -42,7 +42,7 @@ export default function DeckTree({ decks, showImg }) {
                     {decks.map((deck) => (
                         <li 
                             key={deck.deck_id} 
-                            onClick={() => handleDeckClick(deck.deck_id, deck.deck_name, deck.deck_type, deck.layout_setting_front, deck.layout_setting_back)} 
+                            onClick={() => handleDeckClick(deck.deck_id, deck.deck_name, deck.deck_type, deck.deck_properties, deck.layout_setting_front, deck.layout_setting_back)} 
                             style={{ cursor: 'pointer' }}
                             className="deck-item"
                         >
