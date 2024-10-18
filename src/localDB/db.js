@@ -9,13 +9,13 @@ db.version(1).stores({
     cards: 'card_id, deck_id, front, back, difficulty, delay_value, step, avg_comp_time, status, again, hard, good, easy, overdue_at, created_at'
 });
 
-const addDeck = async (deck_name, deck_type) => {
+const addDeck = async (deck_path, deck_type) => {
     const layoutDefault = {
         layoutType: "vertically",
         alignment: "center",
         blocks: []
-    }
-    const names = deck_name.split('::');
+    };
+    const names = deck_path.split('::');
     let parentPath = '';
     const deck_properties = [];
     const layout_setting_front = layoutDefault;
@@ -25,14 +25,14 @@ const addDeck = async (deck_name, deck_type) => {
         const currentName = names[i].trim();
         const currentPath = parentPath ? `${parentPath}::${currentName}` : currentName;
 
+        // Kiểm tra xem deck đã tồn tại với path và type tương ứng hay chưa
         const existingDeck = await db.decks
             .where('deck_path').equals(currentPath)
             .and(deck => deck.deck_type === deck_type)
             .first();
-        if (existingDeck) {
-            return `Deck with path "${currentPath}" and type "${deck_type}" already exists.`;
-        }
+        
         if (!existingDeck) {
+            // Tạo deck mới nếu chưa tồn tại
             const newDeck = new Deck(
                 uuidv4(),
                 currentName,
@@ -44,14 +44,38 @@ const addDeck = async (deck_name, deck_type) => {
             );
             await db.decks.add(newDeck.getInfo());
         }
+
+        // Cập nhật parentPath cho lần lặp tiếp theo
         parentPath = currentPath;
     }
+
     return 'successfully';
 };
+
+const deleteDeck = async (deck_id) => {
+    const deck = await db.decks.get(deck_id);
+    if (!deck) {
+        return { status: 404, message: 'Deck not found' };
+    }
+    const { deck_path } = deck;
+    const decksToDelete = await db.decks
+        .where('deck_path')
+        .startsWith(deck_path)
+        .toArray();
+    for (const deckToDelete of decksToDelete) {
+        await db.cards.where('deck_id').equals(deckToDelete.deck_id).delete();
+    }
+    await db.decks
+        .where('deck_path')
+        .startsWith(deck_path)
+        .delete();
+    return { status: 200, message: 'Deck and its associated cards deleted successfully' };
+};
+
 const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlocks, quantityAdded) => {
     const deck = await db.decks.get(deckId);
     if (!deck) {
-        throw new Error(`Deck with ID "${deckId}" not found.`);
+        return { status: 404, message: 'Deck not found' };
     }
     const newCount = deck.new_count + quantityAdded;
     await db.decks.update(deckId, {
@@ -61,6 +85,7 @@ const updateDeckAfterAddCard = async (deckId, properties, frontBlocks, backBlock
         new_count: newCount,
         deck_last_update: new Date().toISOString()
     });
+    return { status: 200, message: 'Deck updated successfully' };
 };
 const updateDeckAfterLearning = async (deckId, from, to, count) => {
     const deck = await db.decks.get(deckId);
@@ -162,8 +187,23 @@ const addCard = async (deck_id, usingProperties, t) => {
 
 //NEW_CARD LEARNING_CARD, REVIEW_CARD, COOLING_CARD
 const getCardOfDeck = async (deck_id) => {
-    const cards = await db.cards.where('deck_id').equals(deck_id).toArray();
-    const filteredCards = cards.filter(card => card.status !== Status.COOLING_CARD);
+    const currentDeck = await db.decks.get(deck_id);
+    if (!currentDeck) {
+        return []; // Trả về mảng rỗng nếu không tìm thấy deck
+    }
+
+    const allDecks = await db.decks
+        .where('deck_path')
+        .startsWith(currentDeck.deck_path)
+        .toArray();
+    const deckIds = allDecks.map(deck => deck.deck_id);
+    const allCards = await db.cards
+        .where('deck_id')
+        .anyOf(deckIds)
+        .toArray();
+
+    const filteredCards = allCards.filter(card => card.status !== Status.COOLING_CARD);
+    // Sắp xếp các card theo thứ tự ưu tiên
     const sortedCards = filteredCards.sort((a, b) => {
         const statusPriority = {
             'LEARNING_CARD': 1,
@@ -172,8 +212,10 @@ const getCardOfDeck = async (deck_id) => {
         };
         return statusPriority[a.status] - statusPriority[b.status];
     });
+
     return sortedCards;
 };
+
 
 const updateCardById = async (card_id, updatedCard) => {
     const card = await db.cards.get(card_id);
@@ -216,12 +258,32 @@ const checkOverdueCard = async() => {
 
 
 const getDeck = async (deck_id) => {
-    return await db.decks.get(deck_id);
+    const currentDeck = await db.decks.get(deck_id);
+    if (!currentDeck) {
+        return null; // Trả về null nếu không tìm thấy deck
+    }
+
+    let totalNewCount = currentDeck.new_count || 0;
+    let totalLearningCount = currentDeck.learning_count || 0;
+    let totalOverdueCount = currentDeck.overdue_count || 0;
+
+    const childDecks = await db.decks
+        .where('deck_path')
+        .startsWith(`${currentDeck.deck_path}::`)
+        .toArray();
+    for (const childDeck of childDecks) {
+        totalNewCount += childDeck.new_count || 0;
+        totalLearningCount += childDeck.learning_count || 0;
+        totalOverdueCount += childDeck.overdue_count || 0;
+    }
+    return {
+        ...currentDeck,
+        new_count: totalNewCount,
+        learning_count: totalLearningCount,
+        overdue_count: totalOverdueCount
+    };
 };
 
-const deleteDeck = async (deck_id) => {
-    return await db.decks.delete(deck_id);
-};
 
 const getAllDecks = async () => {
     return await db.decks.toArray();
